@@ -1,0 +1,14 @@
+<nav>
+    <div class="container">
+        <div class="logo">
+            <a routerLink="/dashboard">{{title}}</a>
+        </div>
+        <div class="menu">
+            <ul>
+                <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+                <li><a [routerLink]="['/manage']" routerLinkActive="active">Manage</a></li>
+                <li><a routerLink="/logout" routerLinkActive="active">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
