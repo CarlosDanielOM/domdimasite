@@ -12,7 +12,7 @@ export class LogoutComponent {
   constructor(
     private router: Router
   ) {
-    localStorage.clear();
+    sessionStorage.clear();
   }
 
   ngOnInit() {

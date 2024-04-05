@@ -26,7 +26,7 @@ export class LoginComponent {
   }
 
   ngOnInit() {
-    this.token = localStorage.getItem('token') || '';
+    this.token = sessionStorage.getItem('token') || '';
     if (this.token) {
       this.checkIfUserExists(this.token);
     } else {
@@ -45,8 +45,6 @@ export class LoginComponent {
     // Add a return statement to ensure the function returns a value
     let response: any = null;
 
-    console.log({ token, where: 'loginWithToken', token2: this.token })
-
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', `Bearer ${token}`);
@@ -58,7 +56,7 @@ export class LoginComponent {
 
       if (!user.id) {
         //! User Denied Access
-        localStorage.clear();
+        sessionStorage.clear();
         this.router.navigate(['/']);
       }
 
@@ -70,15 +68,25 @@ export class LoginComponent {
       }).subscribe((exists: any) => {
 
         if (exists.saved || exists.exists) {
-          localStorage.setItem('token', token);
-          localStorage.setItem('username', user.login);
-          localStorage.setItem('user_id', user.id);
-          localStorage.setItem('display_name', user.display_name);
-          localStorage.setItem('profile_image', user.profile_image_url);
-          localStorage.setItem('email', user.email);
-          this.router.navigate(['/dashboard']);
+          sessionStorage.setItem('token', token);
+          sessionStorage.setItem('username', user.login);
+          sessionStorage.setItem('user_id', user.id);
+          sessionStorage.setItem('display_name', user.display_name);
+          sessionStorage.setItem('profile_image', user.profile_image_url);
+          sessionStorage.setItem('email', user.email);
+          this.http.post(`${this.linksService.getApiURL()}/premium`, {
+            channel: user.login,
+            channelID: user.id
+          }).subscribe((premium: any) => {
+            if (premium.error) {
+              sessionStorage.clear();
+              this.router.navigate(['/']);
+            }
+            sessionStorage.setItem('premium', premium.premium || 'none');
+            this.router.navigate(['/dashboard']);
+          });
         } else {
-          localStorage.clear();
+          sessionStorage.clear();
           alert('There was a problem with your login, please try again.');
           this.router.navigate(['/']);
         }
@@ -98,7 +106,7 @@ export class LoginComponent {
       res = res.data[0] || {};
 
       if (res.error) {
-        localStorage.clear();
+        sessionStorage.clear();
         this.router.navigate(['/']);
       }
 
@@ -108,17 +116,18 @@ export class LoginComponent {
         id: res.id
       }).subscribe((exists: any) => {
         if (!exists.exists) {
-          localStorage.clear();
+          sessionStorage.clear();
           alert('There was a problem with your login, please try again.');
           this.router.navigate(['/']);
         }
 
-        localStorage.setItem('token', token);
-        localStorage.setItem('username', res.login);
-        localStorage.setItem('user_id', res.id);
-        localStorage.setItem('display_name', res.display_name);
-        localStorage.setItem('profile_image', res.profile_image_url);
-        localStorage.setItem('email', res.email);
+        sessionStorage.setItem('token', token);
+        sessionStorage.setItem('username', res.login);
+        sessionStorage.setItem('user_id', res.id);
+        sessionStorage.setItem('display_name', res.display_name);
+        sessionStorage.setItem('profile_image', res.profile_image_url);
+        sessionStorage.setItem('email', res.email);
+        sessionStorage.setItem('premium', 'none');
         this.router.navigate(['/dashboard']);
       });
     });

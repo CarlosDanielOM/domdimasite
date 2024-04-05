@@ -13,17 +13,26 @@
                         <h2 class="title">Triggers</h2>
                     </header>
                 </div>
-                <div class="trigger" [id]="triggerList._id">
+                <!--<div class="trigger" *ngFor="let trigger of triggerList; index as i; first as isFirst">
                     <div class="trigger-header">
                         <h2>{{triggerList.name}}</h2>
                     </div>
-                    <div class="trigger-content"></div>
-                    <div class="trigger-footer">
+                    <div class="trigger-content">
+                        <div class="trigger-info">
+                            <p>Cost: {{triggerList.cost}}</p>
+                            <p>Type: {{triggerList.type}} </p>
+                            <p>Cooldown: {{triggerList.cooldown}} </p>
+                        </div>
                         <div class="trigger-actions">
-                            <button></button>
+                            <button class="btn btn-warning" [id]="triggerList._id" disabled="true">Edit</button>
                         </div>
                     </div>
-                </div>
+                    <div class="trigger-footer">
+                        <div class="trigger-actions">
+                            <button class="btn btn-danger" [id]="triggerList._id">Delete</button>
+                        </div>
+                    </div>
+                </div>-->
             </div>
         </section>
         <section id="mediaSection" class="mediaSection">

@@ -24,7 +24,7 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    this.token = localStorage.getItem('token') || '';
+    this.token = sessionStorage.getItem('token') || '';
     if (this.token) {
       this.router.navigate(['/login']);
     }

@@ -12,7 +12,7 @@ import { Trigger } from '../trigger';
 })
 export class ManageTriggersComponent {
 
-  triggerList: Trigger = {
+  triggerList: Trigger[] = [{
     cooldown: 0,
     cost: 500,
     date: new Date(),
@@ -21,7 +21,7 @@ export class ManageTriggersComponent {
     mediaType: 'video/mp4',
     name: 'Chimuelo Meme',
     type: 'redemption'
-  };
+  }];
 
 
   constructor(
