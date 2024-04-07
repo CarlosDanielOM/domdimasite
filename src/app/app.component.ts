@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { PageAlertsComponent } from './page-alerts/page-alerts.component';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,8 @@ import { HomeComponent } from './home/home.component';
   imports: [
     CommonModule,
     RouterOutlet,
-    HomeComponent
+    HomeComponent,
+    PageAlertsComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

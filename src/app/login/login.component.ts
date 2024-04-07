@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LinksService } from '../links.service';
+import { UserService } from '../user.service';
+import { AlertsService } from '../alerts.service';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +24,8 @@ export class LoginComponent {
     private location: Location,
     private http: HttpClient,
     private linksService: LinksService,
+    private userService: UserService,
+    private alertsService: AlertsService
   ) {
   }
 
@@ -56,7 +60,7 @@ export class LoginComponent {
 
       if (!user.id) {
         //! User Denied Access
-        sessionStorage.clear();
+        this.userService.deleteData();
         this.router.navigate(['/']);
       }
 
@@ -68,26 +72,30 @@ export class LoginComponent {
       }).subscribe((exists: any) => {
 
         if (exists.saved || exists.exists) {
-          sessionStorage.setItem('token', token);
-          sessionStorage.setItem('username', user.login);
-          sessionStorage.setItem('user_id', user.id);
-          sessionStorage.setItem('display_name', user.display_name);
-          sessionStorage.setItem('profile_image', user.profile_image_url);
-          sessionStorage.setItem('email', user.email);
+          let UserInfoData = {
+            token: token,
+            username: user.login,
+            id: user.id,
+            display_name: user.display_name,
+            profile_image: user.profile_image_url,
+            email: user.email,
+            role: 'none'
+          }
           this.http.post(`${this.linksService.getApiURL()}/premium`, {
             channel: user.login,
             channelID: user.id
           }).subscribe((premium: any) => {
             if (premium.error) {
-              sessionStorage.clear();
+              this.userService.deleteData();
               this.router.navigate(['/']);
             }
-            sessionStorage.setItem('premium', premium.premium || 'none');
+            UserInfoData.role = premium.premium || 'none';
+            this.userService.createUser(UserInfoData);
             this.router.navigate(['/dashboard']);
           });
         } else {
-          sessionStorage.clear();
-          alert('There was a problem with your login, please try again.');
+          this.userService.deleteData();
+          this.alertsService.createAlert('There was a problem with your login, please try again.', 'error');
           this.router.navigate(['/']);
         }
 
@@ -116,18 +124,21 @@ export class LoginComponent {
         id: res.id
       }).subscribe((exists: any) => {
         if (!exists.exists) {
-          sessionStorage.clear();
-          alert('There was a problem with your login, please try again.');
+          this.userService.deleteData();
+          this.alertsService.createAlert('There was a problem with your login, please try again.', 'error');
           this.router.navigate(['/']);
         }
 
-        sessionStorage.setItem('token', token);
-        sessionStorage.setItem('username', res.login);
-        sessionStorage.setItem('user_id', res.id);
-        sessionStorage.setItem('display_name', res.display_name);
-        sessionStorage.setItem('profile_image', res.profile_image_url);
-        sessionStorage.setItem('email', res.email);
-        sessionStorage.setItem('premium', 'none');
+        let UserInfoData = {
+          token: token,
+          username: res.login,
+          id: res.id,
+          display_name: res.display_name,
+          profile_image: res.profile_image_url,
+          email: res.email,
+          role: 'none'
+        }
+        this.userService.createUser(UserInfoData);
         this.router.navigate(['/dashboard']);
       });
     });

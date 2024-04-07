@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-logout',
@@ -10,12 +11,13 @@ import { Router } from '@angular/router';
 })
 export class LogoutComponent {
   constructor(
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {
-    sessionStorage.clear();
   }
 
   ngOnInit() {
+    this.userService.deleteData();
     this.router.navigate(['/']);
   }
 }

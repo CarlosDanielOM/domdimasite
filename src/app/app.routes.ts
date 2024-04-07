@@ -16,6 +16,7 @@ export const routes: Routes = [
         path: 'manage', component: ManageUserViewComponent, children: [
             { path: '', component: ManageViewComponent, title: 'Manage' },
             { path: 'triggers', component: ManageTriggersComponent, title: 'Manage Triggers' },
+            { path: 'vip', component: ManageViewComponent, title: 'VIP' }
         ]
     },
     { path: 'login', component: LoginComponent, title: 'Login' },
