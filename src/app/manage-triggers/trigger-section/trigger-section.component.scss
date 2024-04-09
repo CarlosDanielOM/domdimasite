@@ -1,0 +1,92 @@
+.triggers-section {
+    width: 100%;
+    .row {
+        .button-group {
+            display: flex;
+            justify-content: space-evenly;
+            flex-direction: row-reverse;
+        }
+    }
+    .triggers{
+        width: 100%;
+        height: 100%;
+        max-height: 450px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        .title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .trigger {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 100px;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            transition: all 0.1s ease-in-out;
+            .trigger-header{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 15%;
+                height: 100%;
+                .title {
+                    text-align: center;
+                    font-size: 1rem;
+                    font-weight: bold;
+                    margin-bottom: 20px;
+                }
+            }
+            .trigger-content{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row;
+                width: 70%;
+                height: 100%;
+                .trigger-info {
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    flex-direction: row;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .trigger-footer{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 15%;
+                height: 100%;
+            }
+            &:hover {
+                background-color: #42a5fa;
+                border: 2px solid #000;
+            }
+            &:active {
+                transform: scale(0.95);
+            }
+            &:disabled {
+                background-color: #ccc;
+                border: 1px solid #ccc;
+                cursor: not-allowed;
+                color: #000;
+            }
+            &:disabled:hover {
+                background-color: #616161;
+                color: #000;
+                cursor: not-allowed;
+            }
+        }
+    }
+}

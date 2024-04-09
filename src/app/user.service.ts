@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -7,10 +8,24 @@ export class UserService {
 
   private user: any;
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   createUser(user: any) {
     this.user = user;
+    sessionStorage.setItem('user', JSON.stringify(user));
+  }
+
+  restoreUser(): Boolean {
+    this.user = sessionStorage.getItem('user');
+    if (!this.user) {
+      sessionStorage.removeItem('user');
+      this.deleteData();
+      return false;
+    }
+    this.user = JSON.parse(this.user);
+    return true;
   }
 
   deleteData() {

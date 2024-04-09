@@ -18,6 +18,7 @@ export class LogoutComponent {
 
   ngOnInit() {
     this.userService.deleteData();
+    sessionStorage.removeItem('user');
     this.router.navigate(['/']);
   }
 }

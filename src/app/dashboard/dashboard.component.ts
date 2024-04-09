@@ -19,10 +19,6 @@ export class DashboardComponent {
   ) { }
 
   ngOnInit() {
-    if (!this.userService.getUser()) {
-      this.userService.deleteData();
-      this.router.navigate(['/']);
-    }
   }
 
 }

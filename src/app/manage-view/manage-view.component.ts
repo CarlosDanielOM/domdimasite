@@ -15,13 +15,6 @@ export class ManageViewComponent {
     private userSerivce: UserService
   ) { }
 
-  ngOnInit() {
-    if (!this.userSerivce.getUser()) {
-      this.userSerivce.deleteData();
-      this.router.navigate(['/']);
-    }
-  }
-
   Triggers(): void {
     this.router.navigate(['/manage/triggers']);
   }

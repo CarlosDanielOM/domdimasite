@@ -30,7 +30,9 @@ export class LoginComponent {
   }
 
   ngOnInit() {
-    this.token = sessionStorage.getItem('token') || '';
+    if (this.userService.restoreUser()) {
+      this.token = this.userService.getToken();
+    }
     if (this.token) {
       this.checkIfUserExists(this.token);
     } else {
@@ -114,7 +116,7 @@ export class LoginComponent {
       res = res.data[0] || {};
 
       if (res.error) {
-        sessionStorage.clear();
+        this.userService.deleteData();
         this.router.navigate(['/']);
       }
 

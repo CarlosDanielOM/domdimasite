@@ -1,0 +1,36 @@
+<section class="triggers-section">
+    <div class="row">
+        <div class="button-group">
+            <button class="btn btn-info" id="uploadFileBtn">Upload File</button>
+            <button class="btn btn-info" id="createTriggerBtn">Create Trigger</button>
+        </div>
+    </div>
+    <div class="triggers" id="triggerContainer">
+        <div class="row">
+            <header>
+                <h2 class="title">Triggers</h2>
+            </header>
+        </div>
+        <div class="trigger" *ngFor="let trigger of triggerList; index as i; first as isFirst" [id]="trigger._id">
+            <div class="trigger-header">
+                <h2>{{trigger.name}}</h2>
+            </div>
+            <div class="trigger-content">
+                <div class="trigger-info">
+                    <p>Cost: {{trigger.cost}}</p>
+                    <p>Type: {{trigger.type}} </p>
+                    <p>Cooldown: {{trigger.cooldown}} </p>
+                </div>
+                <div class="trigger-actions">
+                    <button class="btn btn-warning" [id]="trigger._id" (click)="editTrigger(trigger._id)">Edit</button>
+                </div>
+            </div>
+            <div class="trigger-footer">
+                <div class="trigger-actions">
+                    <button class="btn btn-danger" [id]="trigger._id"
+                        (click)="deleteTrigger(trigger._id)">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
