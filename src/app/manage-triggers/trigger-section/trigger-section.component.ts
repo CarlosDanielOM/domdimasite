@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { LinksService } from '../../links.service';
 import { UserService } from '../../user.service';
@@ -15,6 +15,8 @@ import { NgFor } from '@angular/common';
   styleUrl: './trigger-section.component.scss'
 })
 export class TriggerSectionComponent {
+
+  @Output() triggerEdit = new EventEmitter<Trigger>();
 
   triggerList: Trigger[] = [];
 
@@ -54,10 +56,13 @@ export class TriggerSectionComponent {
 
   }
 
+  async updateTriggerList() {
+    this.triggerList = await this.getTriggerList();
+  }
+
   async editTrigger(id: string) {
     let trigger = this.triggerList.find(trigger => trigger._id == id);
 
-    //!Work on this
-
+    this.triggerEdit.emit(trigger);
   }
 }

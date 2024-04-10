@@ -1,8 +1,9 @@
 export interface TriggerFile {
-    _id: String;
-    name: String;
-    fileName: String;
-    fileSize: Number;
-    fileType: String;
-    fileUrl: String;
+    _id: string;
+    name: string;
+    fileName: string;
+    fileSize: number;
+    fileType: string;
+    fileUrl: string;
+    prompt: string | null;
 }

@@ -7,4 +7,5 @@ export interface Trigger {
     mediaType: string;
     name: string;
     type: string;
+    volume: number;
 }

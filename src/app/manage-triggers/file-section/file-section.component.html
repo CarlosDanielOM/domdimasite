@@ -1,1 +1,24 @@
-<p>file-section works!</p>
+<div class="files-section">
+    <h3 class="title">File Media</h3>
+    <div class="files">
+        <div class="file" *ngFor="let file of filesList">
+            <div class="header">
+                <div class="title">
+                    <span>{{file.name}}</span>
+                </div>
+            </div>
+            <div class="body">
+                <div class="content">
+                    <div class="video">
+                        <video src="{{file.fileUrl}}"></video>
+                    </div>
+                </div>
+                <div class="footer">
+                    <div class="actions">
+                        <button class="btn btn-danger" (click)="deleteFile(file._id)">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

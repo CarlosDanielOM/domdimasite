@@ -1,6 +1,15 @@
 #main {
     height: 70%;
     max-height: 500px;
+    .row {
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row-reverse;
+            width: 90%;
+            margin: auto;
+        }
+    }
     .container {
         width: 90%;
         height: 100%;
@@ -16,5 +25,14 @@
             width: 30%;
             height: 100%;
         }
+    }
+    .triggerForm {
+        position: fixed;
+        width: 50vw;
+        height: 70vh;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: aqua;
     }
 }

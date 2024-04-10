@@ -1,6 +1,18 @@
 <section id="main">
+    <div class="row">
+        <div class="button-group">
+            <button class="btn btn-info" id="uploadFileBtn" (click)="startUploadFile()">Upload File</button>
+            <button class="btn btn-info" id="createTriggerBtn" (click)="createTrigger()">Create Trigger</button>
+        </div>
+    </div>
     <div class="container">
-        <app-trigger-section class="triggers"></app-trigger-section>
+        <app-trigger-section class="triggers" (triggerEdit)="startEditTrigger($event)"></app-trigger-section>
         <app-file-section class="files"></app-file-section>
+    </div>
+    <div class="forms">
+        <app-trigger-form [trigger]="editTrigger" [editType]="editType" (closeTriggerForm)="closeForm()"
+            *ngIf="showForm" class="triggerForm" (createTrigger)="updateTriggers()"></app-trigger-form>
+        <app-file-upload-form class="triggerForm" *ngIf="showUploadForm"
+            (closeFileUploadForm)="closeUploadForm()" (fileUploaded)="updateFiles()"></app-file-upload-form>
     </div>
 </section>

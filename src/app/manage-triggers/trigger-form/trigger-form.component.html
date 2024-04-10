@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row">
+        <button (click)="closeForm()" class="closeBTN">X</button>
+    </div>
+    <div class="form">
+        <form [formGroup]="editForm" (submit)="onSubmitEditForm()">
+            <div class="row">
+                <div class="form-group">
+                    <label class="form-label" for="name">Name</label>
+                    <input class="form-input" type="text" formControlName="name" id="name" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="cost">Cost</label>
+                    <input class="form-input" type="number" formControlName="cost" id="cost">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group" *ngIf="!editType">
+                    <label class="form-label" for="triggerType">Trigger Type</label>
+                    <select class="form-select" formControlName="type" id="type">
+                        <option *ngFor="let triggerType of types" [value]="triggerType.id"
+                            [disabled]="triggerType.disabled">{{triggerType.value}}</option>
+                    </select>
+                </div>
+                <div class="form-group" *ngIf="!editType">
+                    <label class="form-label" for="file">File</label>
+                    <select class="form-select" id="file" formControlName="file" (onchange)="showVideoPreview">
+                        <option *ngFor="let file of files, index as i, first as isFirst" [value]="file.name"
+                            [selected]="isFirst">{{file.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <label class="form-label" for="cooldown">Cooldown</label>
+                    <input class="form-input" type="number" formControlName="cooldown" id="cooldown" min="1"
+                        max="99999">
+                </div>
+                <div class="form-group">
+                    <label for="volume">Volume</label>
+                    <div class="volumen-group">
+                        <input class="form-input form-input-range" class="form-input" type="range" name="volume"
+                            id="volume" formControlName="volume" step="1" min="1" max="100" list="volume-markers">
+                        <span>
+                            {{editForm.get('volume')?.value}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <input type="submit" class="btn btn-primary">
+            </div>
+        </form>
+        <div class="row">
+            <video id="video" *ngIf="preview">
+                <source src="{{videoSrc}}" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+<datalist id="volume-markers">
+    <option value="0">
+    <option value="25">
+    <option value="50">
+    <option value="75">
+    <option value="100">
+</datalist>
