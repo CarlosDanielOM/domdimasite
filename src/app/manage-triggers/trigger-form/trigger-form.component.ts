@@ -132,9 +132,4 @@ export class TriggerFormComponent {
     this.closeForm();
   }
 
-  showVideoPreview() {
-    this.videoSrc = this.files.filter(f => f.name === this.editForm.value.file)[0].fileUrl;
-    this.preview = true;
-  }
-
 }

@@ -8,7 +8,7 @@ export class LinksService {
   twitchAuthURL: string;
 
   constructor() {
-    this.twitchAuthURL = 'https://id.twitch.tv/oauth2/authorize?response_type=token&force_verify=false&client_id=jl9k3mi67pmrbl1bh67y07ezjdc4cf&redirect_uri=http://localhost:4200/login&response_type=token';
+    this.twitchAuthURL = 'https://id.twitch.tv/oauth2/authorize?response_type=token&force_verify=false&client_id=jl9k3mi67pmrbl1bh67y07ezjdc4cf&redirect_uri=https://domdimabot.com/login&response_type=token';
   }
 
   getTwitchAuthURL() {
