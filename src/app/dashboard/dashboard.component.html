@@ -1,3 +1,8 @@
 <app-navbar></app-navbar>
 <app-page-alerts></app-page-alerts>
-<p>dashboard works!</p>
+<button class="btn" (click)="joinBtn()">
+    <span *ngIf="joinable; else notJoinable">Join Channel</span>
+    <ng-template #notJoinable>Leave Channel</ng-template>
+</button>
+
+<button class="btn btn-warning" (click)="givePermissions()">Give bot permissions</button>

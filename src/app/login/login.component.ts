@@ -81,17 +81,21 @@ export class LoginComponent {
             display_name: user.display_name,
             profile_image: user.profile_image_url,
             email: user.email,
-            role: 'none'
+            role: 'none',
+            active: false
           }
           this.http.post(`${this.linksService.getApiURL()}/premium`, {
             channel: user.login,
             channelID: user.id
-          }).subscribe((premium: any) => {
+          }).subscribe(async (premium: any) => {
             if (premium.error) {
               this.userService.deleteData();
               this.router.navigate(['/']);
             }
             UserInfoData.role = premium.premium || 'none';
+            let response = await fetch(`${this.linksService.getApiURL()}/active/${user.login}`);
+            let active = await response.json();
+            UserInfoData.active = active.active || false;
             this.userService.createUser(UserInfoData);
             this.router.navigate(['/dashboard']);
           });
@@ -124,7 +128,7 @@ export class LoginComponent {
         name: res.login,
         email: res.email,
         id: res.id
-      }).subscribe((exists: any) => {
+      }).subscribe(async (exists: any) => {
         if (!exists.exists) {
           this.userService.deleteData();
           this.alertsService.createAlert('There was a problem with your login, please try again.', 'error');
@@ -138,8 +142,28 @@ export class LoginComponent {
           display_name: res.display_name,
           profile_image: res.profile_image_url,
           email: res.email,
-          role: 'none'
+          role: 'none',
+          active: false
         }
+        let response = await fetch(`${this.linksService.getApiURL()}/active/${res.login}`);
+        let active = await response.json();
+        UserInfoData.active = active.active || false;
+        response = await fetch(`${this.linksService.getApiURL()}/premium`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            channel: res.login,
+            channelID: res.id
+          })
+        });
+        let premium = await response.json();
+        if (premium.error) {
+          this.userService.deleteData();
+          this.router.navigate(['/']);
+        }
+        UserInfoData.role = premium.premium || 'none';
         this.userService.createUser(UserInfoData);
         this.router.navigate(['/dashboard']);
       });

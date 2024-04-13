@@ -9,7 +9,6 @@ export class UserService {
   private user: any;
 
   constructor(
-    private router: Router
   ) { }
 
   createUser(user: any) {
@@ -78,6 +77,15 @@ export class UserService {
 
   isLoggedIn() {
     return this.user !== null;
+  }
+
+  isActive() {
+    return this.user.active;
+  }
+
+  changeIsActive(value: boolean) {
+    this.user.active = value;
+    sessionStorage.setItem('user', JSON.stringify(this.user));
   }
 
 }

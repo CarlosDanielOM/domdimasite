@@ -8,6 +8,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { ManageTriggersComponent } from './manage-triggers/manage-triggers.component';
 import { ManageUserViewComponent } from './manage-user-view/manage-user-view.component';
 import { ManageViewComponent } from './manage-view/manage-view.component';
+import { ManageVipModuleComponent } from './manage-vip-module/manage-vip-module.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, title: 'DomDimaBot' },
@@ -16,7 +17,7 @@ export const routes: Routes = [
         path: 'manage', component: ManageUserViewComponent, children: [
             { path: '', component: ManageViewComponent, title: 'Manage' },
             { path: 'triggers', component: ManageTriggersComponent, title: 'Manage Triggers' },
-            { path: 'vip', component: ManageViewComponent, title: 'VIP' }
+            { path: 'vip', component: ManageVipModuleComponent, title: 'VIP' }
         ]
     },
     { path: 'login', component: LoginComponent, title: 'Login' },
