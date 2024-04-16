@@ -7,13 +7,15 @@
             <div class="row">
                 <div class="form-group">
                     <label for="name" class="form-label">Name</label>
-                    <input type="text" name="name" id="name" formControlName="name" autocomplete="off">
+                    <input type="text" name="triggerName" id="triggerName" formControlName="triggerName"
+                        autocomplete="off">
                 </div>
             </div>
             <div class="row">
                 <div class="form-group">
                     <label for="file" class="form-label">File</label>
-                    <input type="file" name="file" id="file" formControlName="file" (change)="onSelectFile($event)">
+                    <input type="file" name="trigger" id="trigger" formControlName="trigger"
+                        (change)="onSelectFile($event)">
                 </div>
             </div>
             <div class="row">

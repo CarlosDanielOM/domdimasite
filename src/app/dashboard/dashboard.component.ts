@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { PageAlertsComponent } from '../page-alerts/page-alerts.component';
 import { UserService } from '../user.service';
-import { Router } from '@angular/router';
 import { LinksService } from '../links.service';
 import { CommonModule } from '@angular/common';
 import { AlertsService } from '../alerts.service';

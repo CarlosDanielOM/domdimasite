@@ -1,0 +1,90 @@
+<button class="btn" [disabled]="disbaleCreate" (click)="showFormBtn()">Create VIP Reward</button>
+
+<div class="rewards-container">
+    <div class="rewards">
+        <div class="reward" *ngFor="let reward of vipRewards">
+            <div class="header">
+                <h3>{{ reward.title }}</h3>
+            </div>
+            <div class="body">
+                <p>{{reward.cost}}</p>
+                <input type="checkbox" [checked]="reward.rewardIsEnabled" (input)="toggleEnable()">
+            </div>
+            <div class="footer">
+                <button class="btn btn-primary" (click)="editReward(reward)" disabled>Edit</button>
+                <button class="btn btn-danger" (click)="deleteReward(reward)">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-container" *ngIf="showForm">
+    <div class="row">
+        <button class="btn-exit" (click)="closeForm()">x</button>
+    </div>
+    <h3 class="h1">Create VIP Reward</h3>
+    <form [formGroup]="vipForm" (submit)="onSubmit()" class="form">
+        <section class="normal">
+            <div class="form-group">
+                <label class="form-label" for="name">Name:</label>
+                <input type="text" class="form-input" formControlName="name"
+                    [classList]="name?.valid ? 'valid' : 'invalid'">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="prompt">Prompt</label>
+                <div class="input-group">
+                    <input type="text" class="form-input" formControlName="prompt"
+                        [classList]="prompt?.valid ? 'valid' : 'invalid'">
+                    <p class="text-info">This is the text that shows when a user clicks the reward</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="cost">Cost</label>
+                <input type="number" class="form-input" formControlName="cost"
+                    [classList]="cost?.valid ? 'valid' : 'invalid'">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="message">Message</label>
+                <input type="text" class="form-input" formControlName="message"
+                    [classList]="message?.valid ? 'valid' : 'invalid'">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="skipQueue">SkipQueue</label>
+                <div class="input-group">
+                    <input type="checkbox" class="form-checkbox" formControlName="skipQueue"
+                        [classList]="skipQueue?.valid ? 'valid' : 'invalid'" name="skipQueue" id="skipQueue">
+                    <p class="text-info">If you want for the reward to appear on the queue of twitch</p>
+                </div>
+            </div>
+        </section>
+        <section class="premium" *ngIf="premium">
+            <div class="form-group">
+                <label class="form-label" for="priceIncrease">Price Increase</label>
+                <input type="checkbox" name="priceIncrease" id="priceIncrease" formControlName="priceIncrease"
+                    class="form-checkbox">
+            </div>
+            <div class="form-group" *ngIf="priceIncrease?.value">
+                <label class="form-label" for="priceIncreaseAmount">Price Increase Amount</label>
+                <input type="number" class="form-input" formControlName="priceIncreaseAmount"
+                    [classList]="priceIncrease?.valid ? 'valid' : 'invalid'">
+            </div>
+            <div class="form-group" *ngIf="priceIncrease?.value">
+                <label class="form-label" for="returnToOriginalPrice">Return To Original Price</label>
+                <div class="input-group">
+                    <input type="checkbox" id="returnToOriginalPrice" name="returnToOriginalPrice"
+                        formControlName="returnToOriginalPrice" class="form-checkbox">
+                    <p class="text-info">Reward cost will return to Original at the end of Stream</p>
+                </div>
+            </div>
+            <div class="form-group" *ngIf="!disbaled">
+                <label class="form-label" for="duration">Duration</label>
+                <input type="number" class="form-input" formControlName="duration"
+                    [classList]="duration?.valid ? 'valid' : 'invalid'">
+                <p class="help">Keep at 0 for Permanent VIP</p>
+            </div>
+        </section>
+        <section class="premiumplus" *ngIf="premiumPlus">
+        </section>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>

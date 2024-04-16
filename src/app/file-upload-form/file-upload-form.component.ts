@@ -13,6 +13,7 @@ import { FilesService } from '../files.service';
   templateUrl: './file-upload-form.component.html',
   styleUrl: './file-upload-form.component.scss'
 })
+
 export class FileUploadFormComponent {
   @Output() closeFileUploadForm = new EventEmitter<void>();
   @Output() fileUploaded = new EventEmitter<void>();
@@ -20,8 +21,8 @@ export class FileUploadFormComponent {
   previewURL: string = '';
 
   uploadForm = this.fb.group({
-    name: [''],
-    file: [''],
+    triggerName: [''],
+    trigger: [''],
   });
 
   file!: File;
@@ -43,7 +44,7 @@ export class FileUploadFormComponent {
     this.closeFileUploadForm.emit();
   }
 
-  onSelectFile(event: any) {
+  async onSelectFile(event: any) {
     let reader = new FileReader();
     let file = event.target.files[0];
 
@@ -58,14 +59,11 @@ export class FileUploadFormComponent {
 
   async uploadFile() {
     let formData = new FormData();
-    formData.append('trigger', this.file as Blob);
-    formData.append('triggerName', this.uploadForm.value.name as string);
+    formData.append('triggerName', this.triggerName!.value as string);
+    formData.append('trigger', this.file! as Blob, this.triggerName!.value as string);
 
     let response = await fetch(`${this.linksService.getApiURL()}/trigger/upload/${this.userService.getUsername()}`, {
       method: 'POST',
-      headers: {
-        'Content-Allow-Origin': '*'
-      },
       body: formData
     });
 
@@ -82,6 +80,12 @@ export class FileUploadFormComponent {
 
   }
 
-  
-  
+  get triggerName() {
+    return this.uploadForm.get('triggerName');
+  }
+
+  get fileInput() {
+    return this.uploadForm.get('trigger');
+  }
+
 }

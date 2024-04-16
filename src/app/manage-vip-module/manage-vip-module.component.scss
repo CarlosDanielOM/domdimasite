@@ -1,0 +1,91 @@
+.rewards-container{
+    .rewards {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: start;
+        margin-top: 20px;
+        margin-left: 20px;
+        gap: 20px;
+        .reward {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 10px;
+        }
+    }
+}
+
+.form-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: azure;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 20px;
+    &>.row {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        justify-content: end;
+        .btn-exit {
+            margin-right: 5%;
+            background-color: azure;
+            border: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            &:hover {
+                color: red;
+            }
+        }
+    }
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        .form-group {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            .form-label {
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+            .form-input {
+                width: 200px;
+                height: 30px;
+                border-radius: 5px;
+                padding: 5px;
+                font-size: 1.2rem;
+                font-weight: bold;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.valid {
+    border: 1px solid #28a745;
+}
+
+.invalid {
+    border: 1px solid #dc3545;
+}

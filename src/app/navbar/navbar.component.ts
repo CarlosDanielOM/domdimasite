@@ -17,7 +17,7 @@ export class NavbarComponent {
     private userService: UserService,
     private router: Router
   ) {
-    if (!this.userService.restoreUser()) router.navigate(['/']);
+    if (!this.userService.restoreUser()) this.router.navigate(['/']);
     this.username = this.userService.getUsername();
   }
 
