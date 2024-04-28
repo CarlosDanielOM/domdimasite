@@ -1,22 +1,12 @@
 <h3>Click one to go and edit</h3>
 <div class="container">
-    <div class="card" (click)="Triggers()">
+    <div class="card" *ngFor="let opt of options" (click)="manageView(opt.route)">
         <div class="card-header">
-            <h4 class="card-title">Triggers</h4>
+            <h4 class="card-title">{{opt.name}}</h4>
         </div>
         <div class="card-body">
             <div class="img-container">
-                <img src="assets/images/trigger.png" alt="Triggers" class="img-fluid">
-            </div>
-        </div>
-    </div>
-    <div class="card" (click)="VIP()">
-        <div class="card-header">
-            <h4 class="card-title">VIP</h4>
-        </div>
-        <div class="card-body">
-            <div class="img-container">
-                <img src="assets/images/vip.png" alt="VIP" class="img-fluid">
+                <img src="/src/assets/images/{{opt.img}}.png" alt="{{opt.name}}" class="img-fluid">
             </div>
         </div>
     </div>

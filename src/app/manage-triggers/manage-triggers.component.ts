@@ -5,6 +5,9 @@ import { FileSectionComponent } from './file-section/file-section.component';
 import { Trigger } from '../trigger';
 import { TriggerFormComponent } from './trigger-form/trigger-form.component';
 import { FileUploadFormComponent } from '../file-upload-form/file-upload-form.component';
+import { UserService } from '../user.service';
+import { LinksService } from '../links.service';
+import { AlertsService } from '../alerts.service';
 
 @Component({
   selector: 'app-manage-triggers',
@@ -23,6 +26,8 @@ export class ManageTriggersComponent {
   showForm: boolean = false;
   showUploadForm: boolean = false;
 
+  obsLink: string = '';
+
   editType: boolean = false;
 
   editTrigger: Trigger = {
@@ -37,7 +42,14 @@ export class ManageTriggersComponent {
     volume: 100
   };
 
+  constructor(
+    private userService: UserService,
+    private linksService: LinksService,
+    private alertsService: AlertsService
+  ) {}
+
   ngOnInit() {
+    this.obsLink = `${this.linksService.getApiURL()}/overlays/triggers/${this.userService.getUsername()}`
   }
 
   startEditTrigger(trigger: Trigger) {
@@ -72,4 +84,9 @@ export class ManageTriggersComponent {
     this.showUploadForm = false;
   }
 
+  copyLink() {
+    navigator.clipboard.writeText(this.obsLink);
+    this.alertsService.createAlert('Link copied to clipboard', 'success');
+  }
+  
 }
