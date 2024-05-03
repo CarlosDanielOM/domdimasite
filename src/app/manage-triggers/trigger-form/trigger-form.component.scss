@@ -26,6 +26,9 @@
                 justify-content: space-between;
                 flex-direction: column;
                 margin-bottom: 10px;
+                &.flex {
+                    width: 100%;
+                }
                 .form-label {
                     font-size: 20px;
                     margin-bottom: 5px;

@@ -1,0 +1,82 @@
+<button class="btn btn-primary" (click)="showFormToggle()">Create Redemption</button>
+
+<div class="container">
+    <div class="card-container">
+        <div class="card" *ngFor="let reward of customRewards">
+            <div class="card-header">
+                <h3 class="card-title">{{reward.title}}</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Cost: {{reward.cost}}</p>
+                <div class="enabled">
+                    <input type="checkbox" [checked]="reward.isEnabled">
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary" (click)="editRedemption(reward)">Edit</button>
+                <button class="btn btn-danger" (click)="deleteRedemption(reward)">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-container" *ngIf="showForm">
+    <div class="row">
+        <button class="btn-exit" (click)="showFormToggle()">X</button>
+    </div>
+    <form class="form" [formGroup]="redemptionForm" (ngSubmit)="createRedemption()">
+        <section class="normal">
+            <div class="form-group">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-input" formControlName="title">
+            </div>
+            <div class="form-group">
+                <label for="prompt" class="form-label">Prompt</label>
+                <input type="text" formControlName="prompt" class="form-input">
+            </div>
+            <div class="form-gorup">
+                <label for="cost" class="form-label">Cost</label>
+                <input type="number" class="form-input" formControlName="cost">
+                <p class="text-info">This is the text that the user see before redeeming</p>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <input type="text" class="form-input" formControlName="rewardMessage">
+            </div>
+            <div class="form-group">
+                <label for="skipQueue">Skip Queue</label>
+                <input type="checkbox" id="skipQueue" name="skipQueue" class="form-checkbox" formControlName="skipQueue">
+            </div>
+            <div class="form-group">
+                <label for="cooldown">cooldown</label>
+                <input type="number" class="form-input" formControlName="cooldown">
+            </div>
+        </section>
+        <section class="premium" *ngIf="premium">
+            <div class="form-group">
+                <label class="form-label" for="priceIncrease">Price Increase</label>
+                <input type="checkbox" name="priceIncrease" id="priceIncrease" formControlName="priceIncrease"
+                    class="form-checkbox">
+            </div>
+            <div class="form-group" *ngIf="priceIncrease?.value">
+                <label class="form-label" for="priceIncreaseAmount">Price Increase Amount</label>
+                <input type="number" class="form-input" formControlName="priceIncreaseAmount"
+                    [classList]="priceIncrease?.valid ? 'valid' : 'invalid'">
+            </div>
+            <div class="form-group" *ngIf="priceIncrease?.value">
+                <label class="form-label" for="returnToOriginalCost">Return To Original Cost</label>
+                <div class="input-group">
+                    <input type="checkbox" id="returnToOriginalCost" name="returnToOriginalCost"
+                        formControlName="returnToOriginalCost" class="form-checkbox">
+                    <p class="text-info">Reward cost will return to Original at the end of Stream</p>
+                </div>
+            </div>
+        </section>
+        <div class="row">
+            <button class="btn btn-primary" type="submit" [disabled]="!redemptionForm.valid">
+                <p *ngIf="editForm">Update Reward</p>
+                <p *ngIf="!editForm">Create Reward</p>
+            </button>
+        </div>
+    </form>
+</div>

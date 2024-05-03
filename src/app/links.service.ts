@@ -19,6 +19,10 @@ export class LinksService {
     return 'https://api.domdimabot.com';
   }
 
+  getFakeApiURL() {
+    return 'http://localhost:3000';
+  }
+
   getLink() {
     return this.prod ? 'https://domdimabot.com' : 'http://localhost:4200';
   }

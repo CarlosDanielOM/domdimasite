@@ -47,6 +47,27 @@
                     </div>
                 </div>
             </div>
+            <div class="row" *ngIf="premium && !this.editType">
+                <div class="form-group flex">
+                    <label class="form-label" for="priceIncrease">Price Increase</label>
+                    <input type="checkbox" id="priceIncrease" formControlName="priceIncrease">
+                </div>
+            </div>
+            <div class="row" *ngIf="priceIncrease?.value">
+                <div class="form-group">
+                    <label class="form-label" for="priceIncreaseAmount">Price Increase Amount</label>
+                    <input type="number" class="form-input" formControlName="priceIncreaseAmount"
+                        [classList]="priceIncrease?.valid ? 'valid' : 'invalid'">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="returnToOriginalCost">Return To Original Cost</label>
+                    <div class="input-group">
+                        <input type="checkbox" id="returnToOriginalCost" name="returnToOriginalCost"
+                            formControlName="returnToOriginalCost" class="form-checkbox">
+                        <p class="text-info">Reward cost will return to Original at the end of Stream</p>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <input type="submit" class="btn btn-primary">
             </div>

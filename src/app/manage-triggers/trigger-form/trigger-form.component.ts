@@ -37,6 +37,8 @@ export class TriggerFormComponent {
     { id: 'bits', value: 'bits', disabled: true },
   ];
 
+  premium: boolean = false;
+
   videoSrc: string = '';
   preview: boolean = false;
 
@@ -51,7 +53,10 @@ export class TriggerFormComponent {
     cost: new FormControl(this.trigger.cost),
     date: new FormControl(this.trigger.date),
     mediaType: new FormControl(this.trigger.mediaType),
-    volume: new FormControl(this.trigger.volume)
+    volume: new FormControl(this.trigger.volume),
+    priceIncrease: [false],
+    priceIncreaseAmount: [0],
+    returnToOriginalCost: [false],
   });
 
   constructor(
@@ -67,6 +72,9 @@ export class TriggerFormComponent {
     this.files = await this.filesService.getTriggerFiles();
     this.trigger.file = this.files[0].name;
     this.editForm.patchValue({ file: this.files[0].name });
+    if (this.userService.isPremium() || this.userService.isPremiumPlus()) {
+      this.premium = true;
+    }
   }
 
   closeForm() {
@@ -102,7 +110,10 @@ export class TriggerFormComponent {
         prompt: null,
         fileID: this.files.filter(f => f.name === this.editForm.value.file)[0]._id,
         cooldown: this.editForm.value.cooldown,
-        volume: this.editForm.value.volume
+        volume: this.editForm.value.volume,
+        priceIncrease: this.priceIncreaseAmount!.value ?? 0,
+        returnToOriginalCost: this.returnToOriginalCost!.value ?? false,
+        rewardType: 'trigger'
       }
 
       response = await fetch(`${this.linksService.getApiURL()}/trigger/create/${this.userService.getUsername()}`, {
@@ -131,5 +142,11 @@ export class TriggerFormComponent {
 
     this.closeForm();
   }
+
+  get priceIncrease() {
+    return this.editForm.get('priceIncrease');
+  }
+  get priceIncreaseAmount() { return this.editForm.get('priceIncreaseAmount'); }
+  get returnToOriginalCost() { return this.editForm.get('returnToOriginalCost'); }
 
 }

@@ -15,7 +15,8 @@ export class ManageViewComponent {
   options = [
     { name: 'Triggers', route: 'triggers', img: 'triggers' },
     { name: 'VIP', route: 'vip', img: 'vip' },
-    { name: 'Clips', route: 'clips', img: 'clips' }
+    { name: 'Clips', route: 'clips', img: 'clips' },
+    { name: 'Redemptions', route: 'redemptions', img: 'redemptions' },
   ]
   
   constructor(
