@@ -11,6 +11,7 @@ import { ManageViewComponent } from './manage-view/manage-view.component';
 import { ManageVipModuleComponent } from './manage-vip-module/manage-vip-module.component';
 import { ManageClipsModuleComponent } from './manage-clips-module/manage-clips-module.component';
 import { ManageRedemptionsModuleComponent } from './manage-redemptions-module/manage-redemptions-module.component';
+import { ManageFollowModuleComponent } from './manage-follow-module/manage-follow-module.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, title: 'DomDimaBot' },
@@ -21,7 +22,8 @@ export const routes: Routes = [
             { path: 'triggers', component: ManageTriggersComponent, title: 'Manage Triggers' },
             { path: 'vip', component: ManageVipModuleComponent, title: 'VIP' },
             { path: 'clips', component: ManageClipsModuleComponent, title: 'Clips' },
-            { path: 'redemptions', component: ManageRedemptionsModuleComponent, title: 'Redemptions' }
+            { path: 'redemptions', component: ManageRedemptionsModuleComponent, title: 'Redemptions' },
+            { path: 'follows', component: ManageFollowModuleComponent, title: 'Follows' }
         ]
     },
     { path: 'login', component: LoginComponent, title: 'Login' },

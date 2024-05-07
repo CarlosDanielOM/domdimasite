@@ -17,6 +17,7 @@ export class ManageViewComponent {
     { name: 'VIP', route: 'vip', img: 'vip' },
     { name: 'Clips', route: 'clips', img: 'clips' },
     { name: 'Redemptions', route: 'redemptions', img: 'redemptions' },
+    { name: 'Follows', route: 'follows', img: 'follows' },
   ]
   
   constructor(

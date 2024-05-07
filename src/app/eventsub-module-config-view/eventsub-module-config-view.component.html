@@ -1,0 +1,28 @@
+<button *ngIf="!exists">Activate module</button>
+<div class="eventsub-container" [className]="exists ? 'available' : 'unavailable'">
+    <section class="left inputs">
+        <h2>
+            <span *ngFor="let part of eventType">
+                {{part | titlecase}}
+            </span>
+        </h2>
+        <form [formGroup]="eventsubForm">
+            <div class="formgroup" *ngIf="!endEnabled!.value">
+                <label for="message">Message</label>
+                <textarea type="text" id="message" formControlName="message"></textarea>
+            </div>
+            <div class="form-group" *ngIf="endEnabled!.value">
+                <label for="endMessage">AD End Message</label>
+                <textarea type="text" id="endMessage" formControlName="endMessage"></textarea>
+            </div>
+        </form>
+    </section>
+    <section class="right info">
+        <ul>
+            <li *ngFor="let helper of helpers">
+                <span>{{helper.special}}</span>
+                <span>{{helper.description}}</span>
+            </li>
+        </ul>
+    </section>
+</div>
