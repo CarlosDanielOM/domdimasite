@@ -12,6 +12,11 @@ import { ManageVipModuleComponent } from './manage-vip-module/manage-vip-module.
 import { ManageClipsModuleComponent } from './manage-clips-module/manage-clips-module.component';
 import { ManageRedemptionsModuleComponent } from './manage-redemptions-module/manage-redemptions-module.component';
 import { ManageFollowModuleComponent } from './manage-follow-module/manage-follow-module.component';
+import { ManageStreamOnlineModuleComponent } from './manage-stream-online-module/manage-stream-online-module.component';
+import { ManageStreamOfflineModuleComponent } from './manage-stream-offline-module/manage-stream-offline-module.component';
+import { ManageChannelRaidModuleComponent } from './manage-channel-raid-module/manage-channel-raid-module.component';
+import { ManageAdBreakModuleComponent } from './manage-ad-break-module/manage-ad-break-module.component';
+import { ShowReservedCommandsComponent } from './show-reserved-commands/show-reserved-commands.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, title: 'DomDimaBot' },
@@ -23,7 +28,20 @@ export const routes: Routes = [
             { path: 'vip', component: ManageVipModuleComponent, title: 'VIP' },
             { path: 'clips', component: ManageClipsModuleComponent, title: 'Clips' },
             { path: 'redemptions', component: ManageRedemptionsModuleComponent, title: 'Redemptions' },
-            { path: 'follows', component: ManageFollowModuleComponent, title: 'Follows' }
+            { path: 'follows', component: ManageFollowModuleComponent, title: 'Follows' },
+            { path: 'stream-online', component: ManageStreamOnlineModuleComponent, title: 'Stream Online'},
+            { path: 'stream-offline', component: ManageStreamOfflineModuleComponent, title: 'Stream Offline' },
+            { path: 'raids', component: ManageChannelRaidModuleComponent, title: 'Raids' },
+            { path: 'ad-break', component: ManageAdBreakModuleComponent, title: 'Ad Break'}
+        ]
+    },
+    {
+        path: 'commands', title: 'Commands', children: [
+            { 
+                path: 'show', title: 'Show', children: [
+                    { path: 'reserved', component: ShowReservedCommandsComponent, title: 'Reserved' },
+                ]
+            }
         ]
     },
     { path: 'login', component: LoginComponent, title: 'Login' },

@@ -18,6 +18,10 @@ export class ManageViewComponent {
     { name: 'Clips', route: 'clips', img: 'clips' },
     { name: 'Redemptions', route: 'redemptions', img: 'redemptions' },
     { name: 'Follows', route: 'follows', img: 'follows' },
+    { name: 'Stream Online', route: 'stream-online', img: 'stream-online' },
+    { name: 'Stream Offline', route: 'stream-offline', img: 'stream-offline' },
+    { name: 'Raids', route: 'raids', img: 'raids' },
+    { name: 'Ad Break', route: 'ad-break', img: 'ad-break' }
   ]
   
   constructor(

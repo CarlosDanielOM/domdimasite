@@ -7,4 +7,5 @@ export interface Eventsub {
     message?: string;
     endMessage?: string;
     endEnabled?: boolean;
+    minViewers?: number;
 }

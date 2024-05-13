@@ -1,27 +1,43 @@
-<button *ngIf="!exists">Activate module</button>
-<div class="eventsub-container" [className]="exists ? 'available' : 'unavailable'">
+<div [className]="exists ? 'display-block unblocked' : 'display-block blocked'">
+    <button class="btn btn-info create-btn" *ngIf="!exists" (click)="createEventsubFun()">Activate module</button>
+</div>
+<div [className]="exists ? 'eventsub-container' : 'eventsub-container'">
     <section class="left inputs">
         <h2>
             <span *ngFor="let part of eventType">
                 {{part | titlecase}}
             </span>
         </h2>
-        <form [formGroup]="eventsubForm">
-            <div class="formgroup" *ngIf="!endEnabled!.value">
+        <form [formGroup]="eventsubForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
                 <label for="message">Message</label>
                 <textarea type="text" id="message" formControlName="message"></textarea>
+            </div>
+            <div class="form-group" *ngIf="adBreakEnabled">
+                <label for="endEnabled">Enabled Ad end Message</label>
+                <input type="checkbox" name="endEnabled" id="endEnabled" formControlName="endEnabled">
             </div>
             <div class="form-group" *ngIf="endEnabled!.value">
                 <label for="endMessage">AD End Message</label>
                 <textarea type="text" id="endMessage" formControlName="endMessage"></textarea>
             </div>
+            <div class="form-group" *ngIf="raidEnabled">
+                <label for="minViewers">Minimum Viewers for Raid</label>
+                <input type="number" id="minViewers" formControlName="minViewers">
+            </div>
+            <div class="form-group">
+                <button type="submit">Update</button>
+            </div>
         </form>
+        <div class="deactivate">
+            <button *ngIf="exists" (click)="deleteEventsubFun()">Deactivate module</button>
+        </div>
     </section>
     <section class="right info">
         <ul>
             <li *ngFor="let helper of helpers">
-                <span>{{helper.special}}</span>
-                <span>{{helper.description}}</span>
+                <span class="special">{{helper.special}}:</span>
+                <span class="descrip">{{helper.description}}</span>
             </li>
         </ul>
     </section>

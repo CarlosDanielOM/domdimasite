@@ -1,0 +1,20 @@
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>CMD</th>
+            <th>Description</th>
+            <th>Enabled</th>
+            <th>UserLevel</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let command of commands">
+            <td>{{ command.name }}</td>
+            <td>{{ command.cmd }}</td>
+            <td>{{ command.description }}</td>
+            <td>{{ command.enabled }}</td>
+            <td>{{ command.userLevelName || 'everyone'}}</td>
+        </tr>
+    </tbody>
+</table>

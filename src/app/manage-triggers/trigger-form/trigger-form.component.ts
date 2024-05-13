@@ -129,7 +129,7 @@ export class TriggerFormComponent {
 
     if (res.error) {
       this.closeForm();
-      return this.alertsService.createAlert(res.reason, 'danger')
+      return this.alertsService.createAlert(res.message, 'danger')
     };
 
     if (this.editType) {

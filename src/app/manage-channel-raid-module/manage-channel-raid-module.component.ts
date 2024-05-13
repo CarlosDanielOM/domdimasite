@@ -1,30 +1,31 @@
 import { Component } from '@angular/core';
-import { EventsubService } from '../eventsub.service';
 import { Eventsub } from '../eventsub';
-import { NgFor, NgIf } from '@angular/common';
-import { EventsubModuleConfigViewComponent } from '../eventsub-module-config-view/eventsub-module-config-view.component';
+import { EventsubService } from '../eventsub.service';
 import { UserService } from '../user.service';
+import { EventsubModuleConfigViewComponent } from '../eventsub-module-config-view/eventsub-module-config-view.component';
 
 @Component({
-  selector: 'app-manage-follow-module',
+  selector: 'app-manage-channel-raid-module',
   standalone: true,
-  imports: [NgFor, NgIf, EventsubModuleConfigViewComponent],
-  templateUrl: './manage-follow-module.component.html',
-  styleUrl: './manage-follow-module.component.scss'
+  imports: [EventsubModuleConfigViewComponent],
+  templateUrl: './manage-channel-raid-module.component.html',
+  styleUrl: './manage-channel-raid-module.component.scss'
 })
-export class ManageFollowModuleComponent {
+export class ManageChannelRaidModuleComponent {
   eventsubs: Eventsub[] = [];
   eventsub: Eventsub = <Eventsub>{};
 
   exists: boolean = true;
 
   helpers = [
-    { special: '$(user)', description: 'The user that followed the channel' },
     { special: '$(twitch channel)', description: 'The channel that was followed' },
-    { special: '$(twitch title)', description: 'The title of the channel that was followed' }
+    { special: '$(twitch title)', description: 'The title of the channel that was followed' },
+    { special: '$(twitch game)', description: 'The game that you are starting with'},
+    { special: '$(raid channel)', description: 'The channel that raided you'},
+    { special: '$(raid viewers)', description: 'Amount of viewers that raided you'},
   ]
 
-  type: string = 'channel.follow';
+  type: string = 'channel.raid';
   splitType: string[] = this.type.split('.');
   
   constructor(
@@ -61,5 +62,5 @@ export class ManageFollowModuleComponent {
     this.eventsubService.deleteEventsub(id);
     this.exists = false;
   }
-  
+
 }
