@@ -38,7 +38,7 @@ export class FileSectionComponent {
     let userAction = confirm('Are you sure you want to delete this file?');
     if (!userAction) return;
 
-    let res = await fetch(`${this.linkService.getApiURL()}/trigger/files/${this.userService.getUsername()}/${id}`, {
+    let res = await fetch(`${this.linkService.getApiURL()}/triggers/files/${this.userService.getId()}/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

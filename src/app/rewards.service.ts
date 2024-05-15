@@ -22,7 +22,7 @@ export class RewardsService {
   async getVipRewards() {
     if (this.vipRewards) return this.vipRewards;
 
-    let response = await fetch(`${this.linksService.getApiURL()}/rewards/vip/${this.userService.getUsername()}`, {
+    let response = await fetch(`${this.linksService.getApiURL()}/rewards/${this.userService.getId()}/vip`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export class RewardsService {
   async getCustomRewards() {
     if (this.customRewards) return this.customRewards;
 
-    let response = await fetch(`${this.linksService.getApiURL()}/rewards/custom/${this.userService.getUsername()}`, {
+    let response = await fetch(`${this.linksService.getApiURL()}/rewards/${this.userService.getId()}/custom`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ export class RewardsService {
   }
 
   async createReward(data: Reward) {
-    let response = await fetch(`${this.linksService.getApiURL()}/${this.userService.getUsername()}/create/reward`, {
+    let response = await fetch(`${this.linksService.getApiURL()}/rewards/${this.userService.getId()}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -83,7 +83,7 @@ export class RewardsService {
   }
 
   async deleteReward(rewardID: string) {
-    let response = await fetch(`${this.linksService.getApiURL()}/${this.userService.getUsername()}/delete/reward/${rewardID}`, {
+    let response = await fetch(`${this.linksService.getApiURL()}/rewards/${this.userService.getId()}/${rewardID}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -100,7 +100,7 @@ export class RewardsService {
   }
 
   async editReward(rewardID: string, data: Reward) {
-    let response = await fetch(`${this.linksService.getApiURL()}/rewards/${this.userService.getUsername()}/${rewardID}`, {
+    let response = await fetch(`${this.linksService.getApiURL()}/rewards/${this.userService.getId()}/${rewardID}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -118,7 +118,7 @@ export class RewardsService {
 
     this.alertsService.createAlert("Reward Edited Successfully", 'success');
 
-    return json.data;
+    return json.reward;
   }
 
 }

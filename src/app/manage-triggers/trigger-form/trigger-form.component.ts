@@ -93,7 +93,7 @@ export class TriggerFormComponent {
         volume: this.editForm.value.volume
       }
 
-      response = await fetch(`${this.linksService.getApiURL()}/trigger/${this.userService.getUsername()}/${this.editForm.value._id}`, {
+      response = await fetch(`${this.linksService.getApiURL()}/triggers/${this.userService.getId()}/${this.editForm.value._id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
@@ -116,7 +116,7 @@ export class TriggerFormComponent {
         rewardType: 'trigger'
       }
 
-      response = await fetch(`${this.linksService.getApiURL()}/trigger/create/${this.userService.getUsername()}`, {
+      response = await fetch(`${this.linksService.getApiURL()}/triggers/${this.userService.getId()}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

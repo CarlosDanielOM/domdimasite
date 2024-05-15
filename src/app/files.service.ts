@@ -16,7 +16,7 @@ export class FilesService {
   ) { }
 
   async loadTriggerFiles() {
-    let res = await fetch(`${this.linkService.getApiURL()}/trigger/files/${this.userService.getUsername()}`);
+    let res = await fetch(`${this.linkService.getApiURL()}/triggers/files/${this.userService.getId()}`);
 
     let data = await res.json();
 

@@ -33,7 +33,7 @@ export class TriggerSectionComponent {
   }
 
   async getTriggerList(): Promise<Trigger[]> {
-    let res = await fetch(`${this.linkService.getApiURL()}/triggers/${this.userService.getUsername()}`);
+    let res = await fetch(`${this.linkService.getApiURL()}/triggers/${this.userService.getId()}`);
     let data = await res.json();
 
     return data.triggers;
@@ -43,7 +43,7 @@ export class TriggerSectionComponent {
     let confirmDelete = confirm('Are you sure you want to delete this trigger?');
     if (!confirmDelete) return;
 
-    const response = await fetch(`${this.linkService.getApiURL()}/trigger/delete/${this.userService.getUsername()}/${id}`, {
+    const response = await fetch(`${this.linkService.getApiURL()}/triggers/${this.userService.getId()}/${id}`, {
       method: 'DELETE'
     });
 
