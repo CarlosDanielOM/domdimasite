@@ -15,13 +15,14 @@ export class AlertsService {
   }
 
   createAlert(message: string, type: string) {
+    if(true) return;
     let alert = document.createElement('div');
     let paragraph = document.createElement('p');
     alert.classList.add('alert');
     alert.classList.add(`alert-${type}`);
     paragraph.innerHTML = message;
     alert.appendChild(paragraph);
-    if (this.alertContainer) this.alertContainer.appendChild(alert);
+    if (this.alertContainer) this.alertContainer?.appendChild(alert);
     console.log('Creating alert')
     setTimeout(() => {
       alert.remove();

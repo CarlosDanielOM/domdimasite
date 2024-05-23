@@ -17,6 +17,7 @@ import { ManageStreamOfflineModuleComponent } from './manage-stream-offline-modu
 import { ManageChannelRaidModuleComponent } from './manage-channel-raid-module/manage-channel-raid-module.component';
 import { ManageAdBreakModuleComponent } from './manage-ad-break-module/manage-ad-break-module.component';
 import { ShowReservedCommandsComponent } from './show-reserved-commands/show-reserved-commands.component';
+import { SongRequestModuleComponent } from './song-request-module/song-request-module.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, title: 'DomDimaBot' },
@@ -32,12 +33,13 @@ export const routes: Routes = [
             { path: 'stream-online', component: ManageStreamOnlineModuleComponent, title: 'Stream Online'},
             { path: 'stream-offline', component: ManageStreamOfflineModuleComponent, title: 'Stream Offline' },
             { path: 'raids', component: ManageChannelRaidModuleComponent, title: 'Raids' },
-            { path: 'ad-break', component: ManageAdBreakModuleComponent, title: 'Ad Break'}
+            { path: 'ad-break', component: ManageAdBreakModuleComponent, title: 'Ad Break'},
+            { path: 'song-request', component: SongRequestModuleComponent, title: 'Song Request'}
         ]
     },
     {
         path: 'commands', title: 'Commands', children: [
-            { 
+            {
                 path: 'show', title: 'Show', children: [
                     { path: 'reserved', component: ShowReservedCommandsComponent, title: 'Reserved' },
                 ]

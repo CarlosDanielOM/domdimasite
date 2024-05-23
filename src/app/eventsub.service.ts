@@ -3,6 +3,7 @@ import { UserService } from './user.service';
 import { AlertsService } from './alerts.service';
 import { LinksService } from './links.service';
 import { Eventsub } from './eventsub';
+import {MatSnackBar} from '@angular/material/snack-bar'
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class EventsubService {
 
   constructor(
     private userService: UserService,
-    private alertsService: AlertsService,
-    private linksService: LinksService
+    private linksService: LinksService,
+    private matSnackBar: MatSnackBar
   ) { }
 
   async getEventsubs(): Promise<Eventsub[]> {
@@ -27,7 +28,7 @@ export class EventsubService {
     let data = await eventsub.json();
 
     if(data.error) {
-      this.alertsService.createAlert(data.message, 'danger')
+      this.matSnackBar.open(data.message, 'Dismiss', { duration: 2500 });
       return <Eventsub>{};
     };
 
@@ -57,11 +58,11 @@ export class EventsubService {
     let data = await newEventsub.json();
 
     if(data.error) {
-      this.alertsService.createAlert(data.message, 'danger')
+      this.matSnackBar.open(data.message, 'Dismiss', { duration: 2500 });
       return <Eventsub>{};
     };
 
-    this.alertsService.createAlert(data.message, 'success')
+    this.matSnackBar.open(data.message, 'Dismiss', { duration: 2500 });
     return data.eventsub;
   }
 
@@ -76,10 +77,10 @@ export class EventsubService {
     let data = await request.json();
 
     if(data.error) {
-      this.alertsService.createAlert(data.message, 'danger')
+      this.matSnackBar.open(data.message, 'Dismiss', { duration: 2500 });
     };
 
-    this.alertsService.createAlert(data.message, 'success')
+    this.matSnackBar.open(data.message, 'Dismiss', { duration: 2500 });
   }
   
   async updateEventsub(eventsub: Eventsub): Promise<Eventsub> {
@@ -94,11 +95,11 @@ export class EventsubService {
     let data = await updatedEventsub.json();
 
     if(data.error) {
-      this.alertsService.createAlert(data.message, 'danger')
+      this.matSnackBar.open(data.message, 'Dismiss', { duration: 2500 });
       return <Eventsub>{};
     };
 
-    this.alertsService.createAlert(data.message, 'success')
+    this.matSnackBar.open(data.message, 'Dismiss', { duration: 2500 });
     return data.eventsub;
   }
   

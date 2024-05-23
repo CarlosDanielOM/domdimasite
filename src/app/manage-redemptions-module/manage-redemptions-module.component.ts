@@ -94,7 +94,8 @@ export class ManageRedemptionsModuleComponent {
         priceIncrease: this.priceIncreaseAmount!.value ?? 0,
         returnToOriginalCost: this.returnToOriginalCost!.value ?? false,
         rewardMessage: this.rewardMessage!.value ?? '',
-        rewardType: this.redemptionForm.get('rewardType')?.value ?? 'custom'
+        rewardType: this.redemptionForm.get('rewardType')?.value ?? 'custom',
+        cooldown: this.cooldown!.value ?? 0
       }
 
       if(this.cooldown!.value ?? 0 > 0) {

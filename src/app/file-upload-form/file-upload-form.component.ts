@@ -58,8 +58,9 @@ export class FileUploadFormComponent {
   }
 
   async uploadFile() {
+    let URLTriggerName = encodeURIComponent(this.triggerName!.value as string);
     let formData = new FormData();
-    formData.append('triggerName', this.triggerName!.value as string);
+    formData.append('triggerName', URLTriggerName);
     formData.append('trigger', this.file! as Blob, this.triggerName!.value as string);
 
     let response = await fetch(`${this.linksService.getApiURL()}/triggers/upload/${this.userService.getId()}`, {

@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-manage-view',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatCardModule ],
   templateUrl: './manage-view.component.html',
   styleUrl: './manage-view.component.scss'
 })
@@ -21,7 +22,8 @@ export class ManageViewComponent {
     { name: 'Stream Online', route: 'stream-online', img: 'stream-online' },
     { name: 'Stream Offline', route: 'stream-offline', img: 'stream-offline' },
     { name: 'Raids', route: 'raids', img: 'raids' },
-    { name: 'Ad Break', route: 'ad-break', img: 'ad-break' }
+    { name: 'Ad Break', route: 'ad-break', img: 'ad-break' },
+    { name: 'Song Request', route: 'song-request', img: 'song-request' },
   ]
   
   constructor(

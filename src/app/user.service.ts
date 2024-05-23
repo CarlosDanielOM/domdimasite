@@ -39,6 +39,10 @@ export class UserService {
     return this.user.token;
   }
 
+  getAuth() {
+    return this.user.auth;
+  }
+
   getEmail() {
     return this.user.email;
   }

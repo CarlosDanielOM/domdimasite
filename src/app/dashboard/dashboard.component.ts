@@ -5,6 +5,7 @@ import { UserService } from '../user.service';
 import { LinksService } from '../links.service';
 import { CommonModule } from '@angular/common';
 import { AlertsService } from '../alerts.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,7 +23,8 @@ export class DashboardComponent {
   constructor(
     private userService: UserService,
     private linksService: LinksService,
-    private alertsService: AlertsService
+    private alertsService: AlertsService,
+    private matSnackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -54,6 +56,7 @@ export class DashboardComponent {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${this.userService.getAuth()}`
       },
       body: JSON.stringify({ id: this.userService.getId() })
     });
@@ -61,11 +64,15 @@ export class DashboardComponent {
     let data = await response.json();
 
     if (data.error) {
-      this.alertsService.createAlert(data.message, 'danger');
+      this.matSnackBar.open(data.message, 'Dismiss', { duration: 2500 });
     }
 
-    this.alertsService.createAlert(data.message, 'success');
+    this.matSnackBar.open(data.message, 'Dismiss', { duration: 2500 });
 
   }
 
+  spotifyBtn() {
+    window.location.href = `https://spotify.domdimabot.com/login?user_id=${this.userService.getId()}`;
+  }
+  
 }

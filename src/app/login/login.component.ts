@@ -82,7 +82,8 @@ export class LoginComponent {
             profile_image: user.profile_image_url,
             email: user.email,
             role: 'none',
-            active: false
+            active: false,
+            auth: exists.token
           }
           this.http.post(`${this.linksService.getApiURL()}/premium`, {
             channel: user.login,
@@ -143,7 +144,8 @@ export class LoginComponent {
           profile_image: res.profile_image_url,
           email: res.email,
           role: 'none',
-          active: false
+          active: false,
+          auth: exists.token
         }
         let response = await fetch(`${this.linksService.getApiURL()}/active/${res.login}`);
         let active = await response.json();

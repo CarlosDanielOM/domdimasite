@@ -4,6 +4,7 @@ import { Reward } from './reward';
 import { BasicReward } from './basic-reward';
 import { LinksService } from './links.service';
 import { AlertsService } from './alerts.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,13 @@ export class RewardsService {
 
   private vipRewards: any;
   private customRewards: any;
+  private songRewards: any;
 
   constructor(
     private userService: UserService,
     private linksService: LinksService,
-    private alertsService: AlertsService
+    private alertsService: AlertsService,
+    private matSnackBar: MatSnackBar
   ) { }
 
   async getVipRewards() {
@@ -36,6 +39,19 @@ export class RewardsService {
 
     return json.rewards;
 
+  }
+
+  async getSongReward() {
+    if(this.songRewards) return this.songRewards;
+
+    let response = await fetch(`${this.linksService.getApiURL()}/rewards/${this.userService.getId()}/song`);
+
+    let json = await response.json();
+
+    this.songRewards = json.rewards;
+
+    return json.rewards;
+    
   }
 
   async getCustomRewards() {
@@ -73,10 +89,10 @@ export class RewardsService {
     let json = await response.json();
 
     if (json.error) {
-      return this.alertsService.createAlert(json.message, 'danger');
+      return this.matSnackBar.open(json.message, 'Dismiss', { duration: 2500 });
     }
 
-    this.alertsService.createAlert("Reward Created Successfully", 'success');
+    this.matSnackBar.open('Reward Created Successfully', 'Dismiss', { duration: 2500 });
 
     return json.rewardData;
 
@@ -93,10 +109,11 @@ export class RewardsService {
     let json = await response.json();
 
     if (json.error) {
-      return this.alertsService.createAlert(json.message, 'danger');
+      this.matSnackBar.open(json.message, 'Dismiss', { duration: 2500 });
+    } else {
+      this.matSnackBar.open('Reward Deleted Successfully', 'Dismiss', { duration: 2500 });
     }
 
-    this.alertsService.createAlert("Reward Deleted Successfully", 'success');
   }
 
   async editReward(rewardID: string, data: Reward) {
