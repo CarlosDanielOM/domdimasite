@@ -1,5 +1,5 @@
 import { Location, LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { HttpHeaders, HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpHeaders, HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -7,14 +7,10 @@ import { LinksService } from '../links.service';
 import { UserService } from '../user.service';
 import { AlertsService } from '../alerts.service';
 
-@Component({
-  selector: 'app-login',
-  standalone: true,
-  providers: [Location, { provide: LocationStrategy, useClass: HashLocationStrategy }],
-  imports: [HttpClientModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
-})
+@Component({ selector: 'app-login',
+    standalone: true,
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss', imports: [], providers: [Location, { provide: LocationStrategy, useClass: HashLocationStrategy }, provideHttpClient(withInterceptorsFromDi())] })
 export class LoginComponent {
   token: string = '';
   userData: any = {};
