@@ -1,4 +1,4 @@
-<button class="btn btn-success" (click)="showFormToggle()">Create Song Redemption</button>
+<button class="btn btn-success" (click)="showFormToggle()" [disabled]="cardAvailable">Create Song Redemption</button>
 
 @if (cardAvailable) {
     <mat-card class="card">
@@ -6,8 +6,11 @@
             <mat-card-title>Song Request Redemption</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            Hola
         </mat-card-content>
+        <mat-card-actions>
+            <button class="btn btn-warning" (click)="startEditForm()" disabled>Edit</button>
+            <button class="btn btn-danger" (click)="deleteReward()">Delete</button>
+        </mat-card-actions>
     </mat-card>
 }
 
