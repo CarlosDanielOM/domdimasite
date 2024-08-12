@@ -1,4 +1,10 @@
-<button class="btn btn-primary" (click)="showFormToggle()">Create Redemption</button>
+<button class="btn btn-primary" (click)="showFormToggle()">
+    @if (showForm) {
+        <p>Hide Form</p>
+    } @else {
+        <p>Create Redemption</p>
+    }
+</button>
 
 <div class="container">
     <div class="card-container">
@@ -20,7 +26,75 @@
     </div>
 </div>
 
-<div class="form-container" *ngIf="showForm">
+@if (showForm) {
+    <div class="form-container">
+        <form [formGroup]="redemptionForm" (submit)="createRedemption()">
+            <div class="form-row">
+                <mat-form-field hintLabel="Max 25 Characters" color="primary" appearance="fill">
+                    <mat-label>Enter Reward Name</mat-label>
+                    <input type="text" matInput #rewardName placeholder="Example" formControlName="title">
+                    <mat-hint align="end">{{rewardName.value.length}}/25</mat-hint>
+                </mat-form-field>
+                <mat-form-field hintLabel="Text user will see before redeeming" color="primary">
+                    <mat-label>Reward Prompt</mat-label>
+                    <input type="text" matInput #rewardPromt placeholder="This redemption does that" formControlName="prompt">
+                    <mat-hint align="end">{{rewardPromt.value.length}}/50</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="form-row">
+                <mat-form-field hintLabel="Cost of the reward" color="primary">
+                    <mat-label>Cost</mat-label>
+                    <input type="number" matInput #rewardCost placeholder="100" formControlName="cost">
+                    <mat-hint align="end">{{rewardCost.value}}/999999999</mat-hint>
+                </mat-form-field>
+                <mat-form-field hintLabel="Cooldown in seconds">
+                    <mat-label>Cooldown</mat-label>
+                    <input type="number" name="rewardCooldown" id="rewardCooldown" formControlName="cooldown" placeholder="0" matInput>
+                </mat-form-field>
+            </div>
+            <div class="form-row">
+                <mat-form-field hintLabel="Message that will appear on chat">
+                    <mat-label>Reward Message</mat-label>
+                    <textarea class="w-100" name="message" id="message" formControlName="rewardMessage" placeholder="$(user) has redeem $(reward title)" matInput></textarea>
+                </mat-form-field>
+            </div>
+            <div class="form-row">
+                    <div class="form-group">
+                        <p><mat-slide-toggle labelPosition="before" formControlName="skipQueue">Skip Queue</mat-slide-toggle></p>
+                    </div>
+                    <div class="form-group">
+                        <p><mat-slide-toggle labelPosition="before" formControlName="priceIncrease">Price Increase</mat-slide-toggle></p>
+                    </div>
+            </div>
+            @if (priceIncrease?.value) {
+                <div class="right-form">
+                    <div class="form-row">
+                        <mat-form-field>
+                            <mat-label>Price Amount</mat-label>
+                            <input type="number" name="priceAmount" id="priceAmount" formControlName="priceIncreaseAmount" placeholder="0" matInput>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <p><mat-slide-toggle labelPosition="before" formControlName="returnToOriginalCost">Return To Original Price</mat-slide-toggle></p>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="form-row">
+                <button class="btn btn-info" type="submit">
+                    @if (editForm) {
+                        <p>Update Reward</p>
+                    } @else {
+                        <p>Create Reward</p>
+                    }
+                </button>
+            </div>
+        </form>
+    </div>
+}
+
+<!-- <div class="form-container" *ngIf="showForm">
     <div class="row">
         <button class="btn-exit" (click)="showFormToggle()">X</button>
     </div>
@@ -79,4 +153,4 @@
             </button>
         </div>
     </form>
-</div>
+</div> -->

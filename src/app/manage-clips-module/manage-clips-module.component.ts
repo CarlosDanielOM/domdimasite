@@ -21,7 +21,7 @@ export class ManageClipsModuleComponent {
   ) { }
 
   ngOnInit() {
-    this.clipLink = `${this.linksService.getApiURL()}/clip/${this.userService.getUsername()}`;
+    this.clipLink = `${this.linksService.getApiURL()}/clip/${this.userService.getId()}`;
   }
 
   copyToClipboard() {

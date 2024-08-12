@@ -6,11 +6,15 @@ import { LinksService } from '../links.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RewardsService } from '../rewards.service';
 import { Reward } from '../reward';
+import { MatFormField, MatFormFieldControl, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-manage-redemptions-module',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, MatFormField, MatLabel, MatFormFieldModule, MatInputModule, MatSelectModule, MatSlideToggleModule],
   templateUrl: './manage-redemptions-module.component.html',
   styleUrl: './manage-redemptions-module.component.scss'
 })

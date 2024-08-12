@@ -1,14 +1,16 @@
 <app-navbar></app-navbar>
 <app-page-alerts></app-page-alerts>
-<button class="btn" (click)="joinBtn()">
+<button class="btn" (click)="joinBtn()" mat-ripple>
     <span *ngIf="joinable; else notJoinable">Join Channel</span>
     <ng-template #notJoinable>Leave Channel</ng-template>
 </button>
 
 <button class="btn btn-warning" (click)="givePermissions()">Give bot permissions</button>
 
-<div class="spotify-btn">
-    <button class="btn btn-success" (click)="spotifyBtn()">Connect Spotify Account</button>
-    <h2>Only works if you have Spotify Premium</h2>
-    <h2>Solo Funciona Si tienes Spotify Premium</h2>
-</div>
+@if (false) {
+    <div class="spotify-btn">
+        <button class="btn btn-success" (click)="spotifyBtn()">Connect Spotify Account</button>
+        <h2>Only works if you have Spotify Premium</h2>
+        <h2>Solo Funciona Si tienes Spotify Premium</h2>
+    </div>
+}

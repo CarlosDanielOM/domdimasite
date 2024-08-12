@@ -23,7 +23,6 @@ export class ManageViewComponent {
     { name: 'Stream Offline', route: 'stream-offline', img: 'stream-offline' },
     { name: 'Raids', route: 'raids', img: 'raids' },
     { name: 'Ad Break', route: 'ad-break', img: 'ad-break' },
-    { name: 'Song Request', route: 'song-request', img: 'song-request' },
   ]
   
   constructor(

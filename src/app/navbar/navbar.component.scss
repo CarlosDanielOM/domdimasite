@@ -1,3 +1,26 @@
+.spacer {
+    flex: 1 1 auto;
+  }
+
+@media screen and (max-width: 768px) {
+    .pc {
+        display: none;
+    }
+    .mobile {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .pc {
+        display: block;
+    }
+    .mobile {
+        display: none;
+    }
+    
+}
+
 nav {
     display: flex;
     justify-content: space-between;

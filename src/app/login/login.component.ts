@@ -10,7 +10,7 @@ import { AlertsService } from '../alerts.service';
 @Component({ selector: 'app-login',
     standalone: true,
     templateUrl: './login.component.html',
-    styleUrl: './login.component.scss', imports: [], providers: [Location, { provide: LocationStrategy, useClass: HashLocationStrategy }, provideHttpClient(withInterceptorsFromDi())] })
+    styleUrl: './login.component.scss', imports: [], providers: [Location, { provide: LocationStrategy, useClass: HashLocationStrategy }] })
 export class LoginComponent {
   token: string = '';
   userData: any = {};

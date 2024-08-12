@@ -25,25 +25,19 @@
 .form-container {
     position: fixed;
     top: 50%;
-    left: 50%;
+    left: 35%;
     transform: translate(-50%, -50%);
-    background-color: azure;
-    width: 500px;
-    height: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    gap: 20px;
-    &>.row {
+    background: #ffffff;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 3%;
+    .row {
         display: flex;
         width: 100%;
         flex-direction: row;
         justify-content: end;
         .btn-exit {
-            margin-right: 5%;
-            background-color: azure;
+            background-color: #ffffff;
             border: none;
             font-size: 1.2rem;
             font-weight: bold;
@@ -53,34 +47,85 @@
             }
         }
     }
-    .form {
+    .form-row {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        .form-group {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            .form-label {
-                font-size: 1.2rem;
-                font-weight: bold;
-            }
-            .form-input {
-                width: 200px;
-                height: 30px;
-                border-radius: 5px;
-                padding: 5px;
-                font-size: 1.2rem;
-                font-weight: bold;
-                text-align: center;
-            }
-        }
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin-bottom: 25px;
+    }
+    .premium {
+        position: fixed;
+        top: 30%;
+        left: 155%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        animation: slideInFromLeft 1s ease-in-out 0s 1 normal forwards;
+        background-color: #fff;
+        border: 1px solid #000;
+        border-radius: 10px;
+        padding: 3%;
     }
 }
+
+// .form-container {
+//     position: fixed;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     background-color: azure;
+//     width: 500px;
+//     height: 500px;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     margin-top: 20px;
+//     gap: 20px;
+//     &>.row {
+//         display: flex;
+//         width: 100%;
+//         flex-direction: row;
+//         justify-content: end;
+//         .btn-exit {
+//             margin-right: 5%;
+//             background-color: azure;
+//             border: none;
+//             font-size: 1.2rem;
+//             font-weight: bold;
+//             cursor: pointer;
+//             &:hover {
+//                 color: red;
+//             }
+//         }
+//     }
+//     .form {
+//         display: flex;
+//         flex-direction: column;
+//         justify-content: center;
+//         align-items: center;
+//         gap: 10px;
+//         .form-group {
+//             display: flex;
+//             flex-direction: row;
+//             justify-content: center;
+//             align-items: center;
+//             gap: 10px;
+//             .form-label {
+//                 font-size: 1.2rem;
+//                 font-weight: bold;
+//             }
+//             .form-input {
+//                 width: 200px;
+//                 height: 30px;
+//                 border-radius: 5px;
+//                 padding: 5px;
+//                 font-size: 1.2rem;
+//                 font-weight: bold;
+//                 text-align: center;
+//             }
+//         }
+//     }
+// }
 
 .valid {
     border: 1px solid #28a745;
@@ -88,4 +133,20 @@
 
 .invalid {
     border: 1px solid #dc3545;
+}
+
+//ANIMATIONS
+@keyframes slideInFromLeft {
+    0% {
+        left: 100%;
+    }
+    90% {
+        left: 160%;
+    }
+    95% {
+        left: 157%;
+    }
+    100% {
+        left: 155%;
+    }
 }

@@ -18,64 +18,78 @@
     </div>
 </div>
 
-<div class="form-container" *ngIf="showForm">
-    <div class="row">
-        <button class="btn-exit" (click)="closeForm()">x</button>
+@if (showForm) {
+    <div class="form-container">
+        <div class="row">
+            <button class="btn-exit" (click)="closeForm()">x</button>
+        </div>
+        <h3 class="h1">Create VIP Reward</h3>
+        <form [formGroup]="vipForm">
+            <section class="normal">
+                <div class="form-row">
+                    <mat-form-field hintLabel="It has to start with VIP">
+                        <mat-label>Enter Reward Name</mat-label>
+                        <input type="text" #name matInput formControlName="name">
+                        <mat-hint align="end">{{name.value.length}}/25</mat-hint>
+                    </mat-form-field>
+                    <mat-form-field color="primary" hintLabel="The text user will see before redeeming">
+                        <mat-label>Prompt</mat-label>
+                        <input type="text" #prompt matInput formControlName="prompt">
+                        <mat-hint align="end">{{prompt.value.length}}/50</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="form-row">
+                    <mat-form-field hintLabel="Cost of the reward">
+                        <mat-label>Cost</mat-label>
+                        <input type="number" #cost matInput formControlName="cost">
+                        <mat-hint align="end">{{cost.value}}/999999999</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="form-row">
+                    <mat-form-field hintLabel="Message that will appear on chat">
+                        <mat-label>Message</mat-label>
+                        <textarea #message matInput formControlName="message"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <mat-slide-toggle formControlName="skipQueue">Skip Queue</mat-slide-toggle>
+                    </div>
+                    @if(premium) {
+                        <div class="form-group">
+                            <mat-slide-toggle formControlName="priceIncrease">Price Increase</mat-slide-toggle>
+                        </div>
+                    }
+                </div>
+            </section>
+            @if (priceIncrease?.value) {
+                <section class="premium">
+                    <div class="form-row">
+                        <mat-form-field hintLabel="The amount of points it will increase with each redemption">
+                            <mat-label>Price Increase Amount</mat-label>
+                            <input type="number" matInput formControlName="priceIncreaseAmount">
+                            @if (!priceIncreaseAmount?.valid) {
+                                <mat-error>Number must be a positive number</mat-error>
+                            }
+                        </mat-form-field>
+                        <mat-slide-toggle formControlName="returnToOriginalPrice">Return To Original Price</mat-slide-toggle>
+                    </div>
+                    @if (!disbaled) {
+                        <div class="form-row">
+                            <mat-form-field>
+                                <mat-label>Duration</mat-label>
+                                <input type="number" #duration matInput formControlName="duration">
+                                <mat-hint>Keep at 0 for Permanent VIP</mat-hint>
+                            </mat-form-field>
+                        </div>
+                    }
+                </section>
+            }
+        </form>
     </div>
-    <h3 class="h1">Create VIP Reward</h3>
-    <form [formGroup]="vipForm" (submit)="onSubmit()" class="form">
-        <section class="normal">
-            <div class="form-group">
-                <label class="form-label" for="name">Name:</label>
-                <input type="text" class="form-input" formControlName="name"
-                    [classList]="name?.valid ? 'valid' : 'invalid'">
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="prompt">Prompt</label>
-                <div class="input-group">
-                    <input type="text" class="form-input" formControlName="prompt"
-                        [classList]="prompt?.valid ? 'valid' : 'invalid'">
-                    <p class="text-info">This is the text that shows when a user clicks the reward</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="cost">Cost</label>
-                <input type="number" class="form-input" formControlName="cost"
-                    [classList]="cost?.valid ? 'valid' : 'invalid'">
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="message">Message</label>
-                <input type="text" class="form-input" formControlName="message"
-                    [classList]="message?.valid ? 'valid' : 'invalid'">
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="skipQueue">SkipQueue</label>
-                <div class="input-group">
-                    <input type="checkbox" class="form-checkbox" formControlName="skipQueue"
-                        [classList]="skipQueue?.valid ? 'valid' : 'invalid'" name="skipQueue" id="skipQueue">
-                    <p class="text-info">If you want for the reward to appear on the queue of twitch</p>
-                </div>
-            </div>
-        </section>
-        <section class="premium" *ngIf="premium">
-            <div class="form-group">
-                <label class="form-label" for="priceIncrease">Price Increase</label>
-                <input type="checkbox" name="priceIncrease" id="priceIncrease" formControlName="priceIncrease"
-                    class="form-checkbox">
-            </div>
-            <div class="form-group" *ngIf="priceIncrease?.value">
-                <label class="form-label" for="priceIncreaseAmount">Price Increase Amount</label>
-                <input type="number" class="form-input" formControlName="priceIncreaseAmount"
-                    [classList]="priceIncrease?.valid ? 'valid' : 'invalid'">
-            </div>
-            <div class="form-group" *ngIf="priceIncrease?.value">
-                <label class="form-label" for="returnToOriginalPrice">Return To Original Price</label>
-                <div class="input-group">
-                    <input type="checkbox" id="returnToOriginalPrice" name="returnToOriginalPrice"
-                        formControlName="returnToOriginalPrice" class="form-checkbox">
-                    <p class="text-info">Reward cost will return to Original at the end of Stream</p>
-                </div>
-            </div>
+}
+
+<!-- 
             <div class="form-group" *ngIf="!disbaled">
                 <label class="form-label" for="duration">Duration</label>
                 <input type="number" class="form-input" formControlName="duration"
@@ -87,4 +101,4 @@
         </section>
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
-</div>
+</div> -->

@@ -5,11 +5,14 @@ import { UserService } from '../user.service';
 import { AlertsService } from '../alerts.service';
 import { RewardsService } from '../rewards.service';
 import { Reward } from '../reward';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'app-manage-vip-module',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, MatFormFieldModule, MatLabel, MatSlideToggleModule, MatInput],
   templateUrl: './manage-vip-module.component.html',
   styleUrl: './manage-vip-module.component.scss'
 })
@@ -31,7 +34,7 @@ export class ManageVipModuleComponent {
     cost: [1, [Validators.required, Validators.pattern('^[0-9]*$'), Validators.min(1)]],
     skipQueue: [false, [Validators.required]],
     priceIncrease: [false, [Validators.required]],
-    priceIncreaseAmount: [0, [Validators.pattern('^[0-9]*$')]],
+    priceIncreaseAmount: [0, [Validators.pattern('^[0-9]*$'), Validators.min(0)]],
     returnToOriginalPrice: [false, [Validators.required]],
     message: ['', []],
     duration: [0, [Validators.pattern('^[0-9]*$')]],

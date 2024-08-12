@@ -49,7 +49,7 @@ export class ManageTriggersComponent {
   ) {}
 
   ngOnInit() {
-    this.obsLink = `${this.linksService.getApiURL()}/overlays/triggers/${this.userService.getUsername()}`
+    this.obsLink = `${this.linksService.getApiURL()}/overlays/triggers/${this.userService.getId()}`
   }
 
   startEditTrigger(trigger: Trigger) {
