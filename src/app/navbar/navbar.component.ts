@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../user.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,18 +19,20 @@ export class NavbarComponent {
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private renderer: Renderer2,
+    private el: ElementRef
   ) {
     if (!this.userService.restoreUser()) this.router.navigate(['/']);
     this.username = this.userService.getUsername();
   }
 
   navToggle() {
-    const nav = document.getElementById('nav')!;
-    if (nav.style.display === 'none' || nav.style.display === '') {
-      nav.style.display = 'block';
+    let navMenu = this.el.nativeElement.querySelector('#nav-list');
+    if (navMenu.style.display === 'none') {
+      this.renderer.setStyle(navMenu, 'display', 'block');
     } else {
-      nav.style.display = 'none';
+      this.renderer.setStyle(navMenu, 'display', 'none');
     }
   }
 

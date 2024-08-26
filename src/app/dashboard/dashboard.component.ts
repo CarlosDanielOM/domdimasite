@@ -7,11 +7,12 @@ import { CommonModule, Location } from '@angular/common';
 import { AlertsService } from '../alerts.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatRippleModule } from '@angular/material/core';
+import { SideNavbarComponent } from '../side-navbar/side-navbar.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NavbarComponent, PageAlertsComponent, CommonModule, MatRippleModule],
+  imports: [NavbarComponent, PageAlertsComponent, CommonModule, MatRippleModule, SideNavbarComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

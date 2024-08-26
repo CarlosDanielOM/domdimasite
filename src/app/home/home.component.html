@@ -1,4 +1,187 @@
 <div class="container">
+    <section id="landing">
+        <nav id="navbar">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">DomDimaBot</a>
+                <div class="right-side">
+                    <ul class="nav-links">
+                        <li class="nav-link"><a href="#landing">Home</a></li>
+                        <li class="nav-link"><a href="#features">Features</a></li>
+                        <li class="nav-link"><a href="#prices">Pricing</a></li>
+                    </ul>
+                    <button class="btn btn-info" (click)="login()">Login with Twitch</button>
+                </div>
+            </div>
+        </nav>
+        <section id="main">
+            <div class="row">
+                <div class="heading">
+                    <h1 class="title">{{title}}</h1>
+                    <h2 class="description">DomDimaBot is a supercharge chat bot to make your stream more entertaining</h2>
+                    <p class="text">It is a free bot that can be added to any Twitch channel</p>
+                    <p class="contact-info">for more information, please contact the developer at: <a href="mailto:carlosdaniel@carlosdaniel.info">Carlos D.</a>
+                    </p>
+                    <p class="action">To start, just sign up!</p>
+                    <div class="login-action">
+                        <button (click)="login()" class="btn btn-info">Login with Twitch</button>
+                    </div>
+                </div>
+                <div class="image">
+                    <img src="assets/images/OIP.jpg" alt="Super Thank You" class="responsive-img">
+                </div>
+            </div>
+        </section>
+        <footer class="live-stats">
+            <div class="row">
+                <div class="stats">
+                    <div class="active stat">
+                        <p class="label">Active Channels</p>
+                        <p class="value">{{stats.active}}</p>
+                    </div>
+                    <div class="registered stat">
+                        <p class="label">Registered Channels</p>
+                        <p class="value">{{stats.registered}}</p>
+                    </div>
+                    <div class="live stat">
+                        <p class="label">Live Channels</p>
+                        <p class="value">{{stats.live}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="copyright">
+                    <p>&copy; 2024 DomDimaBot</p>
+                </div>
+            </div>
+        </footer>
+    </section>
+    <section id="features">
+        <div class="row">
+            <div class="heading">
+                <h1 class="title">Features</h1>
+                <h2 class="description">DomDimaBot has a lot of features to make your stream more entertaining</h2>
+            </div>
+            <div class="row">
+                <div class="features">
+                    <div class="feature">
+                        <div class="icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div class="content">
+                            <h3 class="title">Clips</h3>
+                            <p class="description">Shows clips on screen when shoutouts are being made!</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="content">
+                            <h3 class="title">Points Redemptions</h3>
+                            <p class="description">Adds extra functionalities to redemption rewards (Twitch)</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="content">
+                            <h3 class="title">Mobile Moderation</h3>
+                            <p class="description">Gives you extra function for mods on mobile</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div class="content">
+                            <h3 class="title">VIP management</h3>
+                            <p class="description">Manage your VIPs and make them temporal or permanent</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="content">
+                            <h3 class="title">Custom Commands</h3>
+                            <p class="description">Create custom commands with the available functions</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="content">
+                            <h3 class="title">Chat Moderation</h3>
+                            <p class="description">Options for Chat moderation as links, spam, etc.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="prices">
+        <div class="row">
+            <div class="heading">
+                <h1 class="title">Pricing</h1>
+                <h2 class="description">DomDimaBot is a free bot, but you can support the developer by donating or subscribing to a premium plan</h2>
+            </div>
+            <div class="row">
+                <div class="plans">
+                    <div class="plan">
+                        <div class="header">
+                            <h3 class="title">Basic</h3>
+                            <p class="price text-center">$0</p>
+                        </div>
+                        <div class="features">
+                            <ul>
+                                <li>Basic Features</li>
+                                <li>Basic Support</li>
+                            </ul>
+                        </div>
+                        <div class="action">
+                            <button class="btn btn-info" (click)="login()">Login</button>
+                            <button class="btn btn-info" disabled>Donate</button>
+                        </div>
+                    </div>
+                    <div class="plan">
+                        <div class="header">
+                            <h3 class="title text-center">Pro</h3>
+                            <p class="price">$8 / month</p>
+                        </div>
+                        <div class="features">
+                            <ul>
+                                <li>Pro Features</li>
+                                <li>Pro Support</li>
+                            </ul>
+                        </div>
+                        <div class="action">
+                            <button class="btn btn-info" disabled>Subscribe</button>
+                        </div>
+                    </div>
+                    <div class="plan">
+                        <div class="header">
+                            <h3 class="title">Premium</h3>
+                            <p class="price">$16 / month</p>
+                        </div>
+                        <div class="features">
+                            <ul>
+                                <li>Premium Features</li>
+                                <li>Premium Support</li>
+                            </ul>
+                        </div>
+                        <div class="action">
+                            <button class="btn btn-info" disabled>Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- <div class="container">
     <section class="section header">
         <h1>{{title}}</h1>
         <h2>DomDimaBot is a supercharge chat bot to make your stream more entertaining</h2>
@@ -8,4 +191,4 @@
         <p>To start, just sign up!</p>
         <button (click)="login()" class="btn btn-info">Login with Twitch</button>
     </section>
-</div>
+</div> -->
