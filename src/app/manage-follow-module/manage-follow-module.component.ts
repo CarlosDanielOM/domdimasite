@@ -33,7 +33,8 @@ export class ManageFollowModuleComponent {
   ) {}
 
   async ngOnInit() {
-    this.eventsub = await this.eventsubService.getEventsubByType(this.type);
+    this.eventsubs = await this.eventsubService.getEventsubByType(this.type) as Eventsub[];
+    this.eventsub = this.eventsubs[0];
     if(!this.eventsub._id) {
       this.exists = false;
     }

@@ -35,7 +35,7 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    this.token = this.userService.getToken() || '';
+    this.token = this.userService.getToken() ?? '';
     if (this.token) {
       this.router.navigate(['/login']);
     }
@@ -49,9 +49,9 @@ export class HomeComponent {
   onWindowScroll() {
     const navbar = document.getElementById('navbar');
     if (window.scrollY > 150) { // Adjust the value as needed
-      navbar?.classList.add('fixed');
+      // navbar?.classList.add('fixed');
     } else {
-      navbar?.classList.remove('fixed');
+      // navbar?.classList.remove('fixed');
     }
   }
 

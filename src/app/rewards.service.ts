@@ -25,51 +25,66 @@ export class RewardsService {
   async getVipRewards() {
     if (this.vipRewards) return this.vipRewards;
 
-    let response = await fetch(`${this.linksService.getApiURL()}/rewards/${this.userService.getId()}/vip`, {
+    let params = new URLSearchParams(); 
+    params.append('type', 'vip');
+
+    let response = await fetch(`${this.linksService.getApiURL()}/rewards/${this.userService.getId()}?${params.toString()}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Content-Allow-Origin': '*'
+        'Content-Allow-Origin': '*',
+        'Authorization': `${this.userService.getAuth()}`
       }
     });
 
     let json = await response.json();
 
-    this.vipRewards = json.rewards;
+    this.vipRewards = json.data;
 
-    return json.rewards;
+    return json.data;
 
   }
 
   async getSongReward() {
     if(this.songRewards) return this.songRewards;
 
-    let response = await fetch(`${this.linksService.getApiURL()}/rewards/${this.userService.getId()}/song`);
+    let params = new URLSearchParams(); 
+    params.append('type', 'song');
+
+    let response = await fetch(`${this.linksService.getApiURL()}/rewards/${this.userService.getId()}?${params.toString()}`, {
+      headers: {
+        'Authorization': `${this.userService.getAuth()}`
+      }
+    });
 
     let json = await response.json();
 
-    this.songRewards = json.rewards;
+    this.songRewards = json.data;
 
-    return json.rewards;
+    return json.data;
     
   }
 
   async getCustomRewards() {
     if (this.customRewards) return this.customRewards;
 
-    let response = await fetch(`${this.linksService.getApiURL()}/rewards/${this.userService.getId()}/custom`, {
+    let params = new URLSearchParams(); 
+    params.append('type', 'custom');
+
+    let response = await fetch(`${this.linksService.getApiURL()}/rewards/${this.userService.getId()}?${params.toString()}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Content-Allow-Origin': '*'
+        'Content-Allow-Origin': '*',
+        'Authorization': `${this.userService.getAuth()}`
       }
     });
 
     let json = await response.json();
 
-    this.customRewards = json.rewards;
+    this.customRewards = json.data;
 
-    return json.rewards;
+    return json.data;
   }
 
   createBasicReward(data: BasicReward) {
@@ -81,7 +96,8 @@ export class RewardsService {
     let response = await fetch(`${this.linksService.getApiURL()}/rewards/${this.userService.getId()}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${this.userService.getAuth()}`
       },
       body: JSON.stringify(data)
     })
@@ -94,7 +110,7 @@ export class RewardsService {
 
     this.matSnackBar.open('Reward Created Successfully', 'Dismiss', { duration: 2500 });
 
-    return json.rewardData;
+    return json.data;
 
   }
 
@@ -102,7 +118,8 @@ export class RewardsService {
     let response = await fetch(`${this.linksService.getApiURL()}/rewards/${this.userService.getId()}/${rewardID}`, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${this.userService.getAuth()}`
       },
     });
 
@@ -120,7 +137,8 @@ export class RewardsService {
     let response = await fetch(`${this.linksService.getApiURL()}/rewards/${this.userService.getId()}/${rewardID}`, {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${this.userService.getAuth()}`
       },
       body: JSON.stringify(data)
     });

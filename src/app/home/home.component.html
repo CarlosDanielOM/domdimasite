@@ -2,8 +2,11 @@
     <section id="landing">
         <nav id="navbar">
             <div class="nav-wrapper">
-                <a href="#" class="brand-logo">DomDimaBot</a>
+                <div class="logo">
+                    <a href="#" class="brand-logo">DomDimaBot</a>
+                </div>
                 <div class="right-side">
+                    <span class="collapse" style="display: none;">=</span>
                     <ul class="nav-links">
                         <li class="nav-link"><a href="#landing">Home</a></li>
                         <li class="nav-link"><a href="#features">Features</a></li>
@@ -16,14 +19,16 @@
         <section id="main">
             <div class="row">
                 <div class="heading">
-                    <h1 class="title">{{title}}</h1>
-                    <h2 class="description">DomDimaBot is a supercharge chat bot to make your stream more entertaining</h2>
-                    <p class="text">It is a free bot that can be added to any Twitch channel</p>
-                    <p class="contact-info">for more information, please contact the developer at: <a href="mailto:carlosdaniel@carlosdaniel.info">Carlos D.</a>
-                    </p>
-                    <p class="action">To start, just sign up!</p>
-                    <div class="login-action">
-                        <button (click)="login()" class="btn btn-info">Login with Twitch</button>
+                    <div class="landing-box">
+                        <h1 class="title">{{title}}</h1>
+                        <h2 class="description">DomDimaBot is a supercharge chat bot to make your stream more entertaining</h2>
+                        <p class="text">It is a free bot that can be added to any Twitch channel</p>
+                        <p class="contact-info">for more information, please contact the developer at: <a href="mailto:carlosdaniel@carlosdaniel.info">Carlos D.</a>
+                        </p>
+                        <p class="action">To start, just sign up!</p>
+                        <div class="login-action">
+                            <button (click)="login()" class="btn btn-info">Login with Twitch</button>
+                        </div>
                     </div>
                 </div>
                 <div class="image">

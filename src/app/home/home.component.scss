@@ -6,26 +6,43 @@
 .container {
   width: 100%;
   height: 300vh;
-  background-color: #636363;
+  background-color: #312945;
   #landing {
     height: 100vh;
     width: 100%;
     overflow: hidden;
-    nav {
+    #navbar {
       width: 100%;
-      height: 10%;
+      height: 5rem;
       transition: all 0.3s ease;
-      .brand-logo {
-        font-size: 2rem;
-        margin-left: 20px;
-        text-decoration: none;
-      }
+      position: sticky;
+      top: 0px;
       .nav-wrapper {
         height: 100%;
         width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        background-color: #21152b;
+        box-shadow: -1px 3px 10px -1px rgba(0, 0, 0, 0.48);
+        .logo {
+          // background-color: #000000;
+          height: 3rem;
+          display: flex;
+          align-items: center;
+          border-radius: 5px;
+          margin: 1rem;
+          padding: 1rem 2rem 1rem;
+          .brand-logo {
+            font-size: 2rem;
+            // margin-left: 20px;
+            text-decoration: none;
+            color: #ffffff;
+            &:visited {
+              color:#670bb1
+            }
+          }
+        }
         .right-side {
           width: 40%;
           margin-right: 20px;
@@ -40,11 +57,11 @@
               margin: 0 10px;
               a {
                 text-decoration: none;
-                color: #000;
+                color: #fff;
                 font-size: 1.5rem;
                 transition: all 0.3s ease;
                 &:hover {
-                  color: #42a5fa;
+                  color: #8a42fa;
                 }
               }
             }
@@ -60,38 +77,34 @@
       align-items: center;
       .heading {
         width: 65%;
-        height: 100%;
-        .title {
-          text-align: center;
-          font-size: 3rem;
-          margin-top: 20px;
-        }
-        .description {
-          text-align: center;
-          font-size: 1.5rem;
-          margin-top: 20px;
-        }
-        p {
-          text-align: center;
-          font-size: 1.5rem;
-          margin-top: 20px;
-        }
-        .login-action {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        .landing-box {
+          background-color: rgba(0, 0, 0, 0.4);
+          border-radius: 5px;
+          margin: 1.2rem;
+          min-height: 60vh;
+          box-shadow: -1px 3px 10px -1px rgba(0, 0, 0, 0.48);
           display: flex;
+          flex-direction: column;
           justify-content: center;
-          align-items: center;
-          margin-top: 20px;
-          button {
-            padding: 10px 20px;
-            background-color: #42a5fa;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            &:hover {
-              background-color: #2d7cf7;
-            }
+          .title {
+            text-align: center;
+            font-size: 3rem;
+          }
+          .description {
+            text-align: center;
+            font-size: 1.5rem;
+          }
+          p {
+            text-align: center;
+            font-size: 1.5rem;
+          }
+          .login-action {
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
         }
       }
@@ -178,7 +191,7 @@
         justify-content: center;
         align-items: center;
         border: 1px solid #000;
-        background-color: #7d7d7d;
+        background-color: #330c3f;
         border-radius: 5px;
         transition: all 0.3s ease;
         .title {
@@ -194,7 +207,7 @@
           font-size: 3rem;
         }
         &:hover {
-          background-color: #636363;
+          background-color: #270432;
         }
       }
     }
@@ -232,7 +245,7 @@
         justify-content: center;
         align-items: center;
         border: 1px solid #000;
-        background-color: #7d7d7d;
+        background-color: #301675;
         border-radius: 5px;
         .title {
           font-size: 2rem;

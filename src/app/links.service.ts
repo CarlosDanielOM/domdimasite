@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class LinksService {
-  prod: boolean = true;
+  prod: boolean = false;
   twitchAuthURL: string;
 
   constructor() {

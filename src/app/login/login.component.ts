@@ -28,6 +28,7 @@ export class LoginComponent {
   ngOnInit() {
     if (this.userService.restoreUser()) {
       this.token = this.userService.getToken();
+      console.log('User exists')
     }
     if (this.token) {
       this.checkIfUserExists(this.token);
@@ -37,8 +38,9 @@ export class LoginComponent {
       if (!this.token) {
         //! User Denied Access
         this.router.navigate(['/']);
+        console.log('User denied access');
       }
-
+      console.log('Login with token');
       this.loginWithToken(this.token);
     }
   }
@@ -55,21 +57,19 @@ export class LoginComponent {
 
     response = this.http.get('https://api.twitch.tv/helix/users', { headers: headers }).subscribe((res: any) => {
       let user = res.data[0] || {};
-
       if (!user.id) {
         //! User Denied Access
         this.userService.deleteData();
         this.router.navigate(['/']);
       }
 
-      this.http.post(`${this.linksService.getApiURL()}/login`, {
+      this.http.post(`${this.linksService.getApiURL()}/auth/login`, {
         name: user.login,
         email: user.email,
         id: user.id,
         action: 'login'
       }).subscribe((exists: any) => {
-
-        if (exists.saved || exists.exists) {
+        if (exists.data) {
           let UserInfoData = {
             token: token,
             username: user.login,
@@ -81,7 +81,7 @@ export class LoginComponent {
             active: false,
             auth: exists.token
           }
-          this.http.post(`${this.linksService.getApiURL()}/premium`, {
+          this.http.post(`${this.linksService.getApiURL()}/user/premium`, {
             channel: user.login,
             channelID: user.id
           }).subscribe(async (premium: any) => {
@@ -90,8 +90,9 @@ export class LoginComponent {
               this.router.navigate(['/']);
             }
             UserInfoData.role = premium.premium || 'none';
-            let response = await fetch(`${this.linksService.getApiURL()}/active/${user.login}`);
+            let response = await fetch(`${this.linksService.getApiURL()}/user/active/${user.login}`);
             let active = await response.json();
+            console.log('Active:', active);
             UserInfoData.active = active.active || false;
             this.userService.createUser(UserInfoData);
             this.router.navigate(['/dashboard']);
@@ -115,18 +116,17 @@ export class LoginComponent {
 
     this.http.get('https://api.twitch.tv/helix/users', { headers: headers }).subscribe((res: any) => {
       res = res.data[0] || {};
-
       if (res.error) {
         this.userService.deleteData();
         this.router.navigate(['/']);
       }
 
-      this.http.post(`${this.linksService.getApiURL()}/login`, {
+      this.http.post(`${this.linksService.getApiURL()}/auth/login`, {
         name: res.login,
         email: res.email,
         id: res.id
       }).subscribe(async (exists: any) => {
-        if (!exists.exists) {
+        if (!exists.data) {
           this.userService.deleteData();
           this.alertsService.createAlert('There was a problem with your login, please try again.', 'error');
           this.router.navigate(['/']);
@@ -143,10 +143,10 @@ export class LoginComponent {
           active: false,
           auth: exists.token
         }
-        let response = await fetch(`${this.linksService.getApiURL()}/active/${res.login}`);
+        let response = await fetch(`${this.linksService.getApiURL()}/user/active/${res.login}`);
         let active = await response.json();
         UserInfoData.active = active.active || false;
-        response = await fetch(`${this.linksService.getApiURL()}/premium`, {
+        response = await fetch(`${this.linksService.getApiURL()}/user/premium`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

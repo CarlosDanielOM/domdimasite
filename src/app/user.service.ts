@@ -27,7 +27,7 @@ export class UserService {
   }
 
   deleteData() {
-    this.user = null;
+    this.user = {};
   }
 
   getUser() {

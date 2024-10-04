@@ -16,11 +16,15 @@ export class FilesService {
   ) { }
 
   async loadTriggerFiles() {
-    let res = await fetch(`${this.linkService.getApiURL()}/triggers/files/${this.userService.getId()}`);
+    let res = await fetch(`${this.linkService.getApiURL()}/triggers/files/${this.userService.getId()}`, {
+      headers: {
+        'Authorization': `${this.userService.getAuth()}`
+      }
+    });
 
     let data = await res.json();
 
-    this.triggerFiles = data.files;
+    this.triggerFiles = data.data;
   }
 
   addTriggerFile(file: TriggerFile) {

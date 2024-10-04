@@ -19,12 +19,20 @@ export class EventsubService {
   ) { }
 
   async getEventsubs(): Promise<Eventsub[]> {
-    let eventsubs = await fetch(`${this.linksService.getApiURL()}/eventsubs/${this.userService.getId()}`);
+    let eventsubs = await fetch(`${this.linksService.getApiURL()}/eventsubs/${this.userService.getId()}`, {
+      headers: {
+        'Authorization': `${this.userService.getAuth()}`
+      }
+    });
     return await eventsubs.json();
   }
 
   async getEventsubById(id: string): Promise<Eventsub> {
-    let eventsub = await fetch(`${this.linksService.getApiURL()}/eventsub/${id}`);
+    let eventsub = await fetch(`${this.linksService.getApiURL()}/eventsub/${id}`, {
+      headers: {
+        'Authorization': `${this.userService.getAuth()}`
+      }
+    });
     let data = await eventsub.json();
 
     if(data.error) {
@@ -32,25 +40,36 @@ export class EventsubService {
       return <Eventsub>{};
     };
 
-    return data.eventsub;
+    return data.data;
   }
 
   async getEventsubByType(type: string): Promise<Eventsub> {
-    let eventsub = await fetch(`${this.linksService.getApiURL()}/eventsubs/${this.userService.getId()}/${type}`);
+    let params = new URLSearchParams(); 
+    params.append('type', type);
+
+    let eventsub = await fetch(`${this.linksService.getApiURL()}/eventsubs/${this.userService.getId()}?${params.toString()}`, {
+      headers: {
+        'Authorization': `${this.userService.getAuth()}`
+      }
+    });
     let data = await eventsub.json();
 
     if(data.error) {
       return <Eventsub>{};
     };
 
-    return data.eventsubs;
+    return data.data;
   }
   
   async createEventsub(eventsub: Eventsub): Promise<Eventsub> {
-    let newEventsub = await fetch(`${this.linksService.getApiURL()}/eventsubs/${this.userService.getId()}`, {
+    let params = new URLSearchParams(); 
+    params.append('type', 'all');
+
+    let newEventsub = await fetch(`${this.linksService.getApiURL()}/eventsubs/${this.userService.getId()}?${params.toString()}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${this.userService.getAuth()}`
       },
       body: JSON.stringify(eventsub)
     });
@@ -63,14 +82,18 @@ export class EventsubService {
     };
 
     this.matSnackBar.open(data.message, 'Dismiss', { duration: 2500 });
-    return data.eventsub;
+    return data.data;
   }
 
   async deleteEventsub(id: string): Promise<void> {
-    let request = await fetch(`${this.linksService.getApiURL()}/eventsubs/${this.userService.getId()}/${id}`, {
+    let params = new URLSearchParams(); 
+    params.append('type', 'all');
+
+    let request = await fetch(`${this.linksService.getApiURL()}/eventsubs/${this.userService.getId()}/${id}?${params.toString()}`, {
       method: 'DELETE',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${this.userService.getAuth()}`
       }
     });
 
@@ -84,10 +107,14 @@ export class EventsubService {
   }
   
   async updateEventsub(eventsub: Eventsub): Promise<Eventsub> {
-    let updatedEventsub = await fetch(`${this.linksService.getApiURL()}/eventsubs/${this.userService.getId()}/${eventsub._id}`, {
+    let params = new URLSearchParams(); 
+    params.append('type', 'all');
+
+    let updatedEventsub = await fetch(`${this.linksService.getApiURL()}/eventsubs/${this.userService.getId()}/${eventsub._id}?${params.toString()}`, {
       method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `${this.userService.getAuth()}`
       },
       body: JSON.stringify(eventsub)
     });
@@ -100,7 +127,7 @@ export class EventsubService {
     };
 
     this.matSnackBar.open(data.message, 'Dismiss', { duration: 2500 });
-    return data.eventsub;
+    return data.data;
   }
   
 }

@@ -42,6 +42,7 @@ export class FileSectionComponent {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `${this.userService.getAuth()}`
       }
     });
 

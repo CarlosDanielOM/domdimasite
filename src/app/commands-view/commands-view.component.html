@@ -1,0 +1,78 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <section id="side-navbar-container">
+        <app-side-navbar (toggle)="changeSideNavSize()"></app-side-navbar>
+    </section>
+    <section id="main">
+        <div class="placeholder">
+            <button class="btn btn-primary" (click)="toggleForm()">Create Command</button>
+        </div>
+        <div class="commands-container">
+            <div class="command-header">
+                <h2 class="command-name">CMD</h2>
+                <h2 class="command-message">Message</h2>
+                <h2 class="command-cooldown">Cooldown</h2>
+                <h2 class="command-actions">Actions</h2>
+            </div>
+            <div class="command-body">
+                <div class="command" *ngFor="let command of commands | slice:((page-1)*pageSize):(page*pageSize)">
+                    <h2 class="command-name">{{ command.cmd }}</h2>
+                    <p class="command-message">{{ command.message || 'Reserved Command' }}</p>
+                    <p class="command-cooldown">{{ command.cooldown }}</p>
+                    <div class="command-actions">
+                        <button class="btn btn-primary">Edit</button>
+                        <button class="btn btn-danger" [disabled]="command.reserved" (click)="deleteCommand(command._id || '')">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="pagination">
+                <button class="btn btn-primary" (click)="goToPage(1)">First</button>
+                <button class="btn btn-primary" (click)="previousPage()" [disabled]="page === 1">Previous</button>
+                <button class="btn btn-primary" (click)="nextPage()" [disabled]="page === totalPages">Next</button>
+                <button class="btn btn-primary" (click)="goToPage(totalPages)">Last</button>
+                <!-- <input type="number" [(ngModel)]="page" (change)="goToPage(page)" [min]="1" [max]="totalPages" /> -->
+                <select name="pageSize" id="pageSize" (change)="changePageSize($event)" [value]="pageSize">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                </select>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div class="form" *ngIf="showForm">
+    <div class="form-container">
+        <h2>Create Command</h2>
+        <form [formGroup]="commandForm" (submit)="createCommand()">
+            <div class="form-group">
+                <label for="cmd">CMD</label>
+                <input type="text" name="cmd" id="cmd" class="form-control" formControlName="cmd" placeholder="CMD">
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <input type="text" name="message" id="message" class="form-control" formControlName="message" placeholder="Message">
+            </div>
+            <div class="form-group">
+                <label for="cooldown">Cooldown</label>
+                <input type="number" name="cooldown" id="cooldown" class="form-control" formControlName="cooldown" placeholder="Cooldown">
+            </div>
+            <div class="form-group">
+                <label for="reserved">User Level</label>
+                <select name="userLevel" id="userLevel" class="form-control" formControlName="userLevel">
+                    @for (userLevel of userLevels; track userLevel) {
+                        <option value="{{ userLevel }}">{{ userLevelNames[userLevel - 1] }}</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" name="description" id="description" class="form-control" formControlName="description" placeholder="Description">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="button" class="btn btn-warning" (click)="toggleForm()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

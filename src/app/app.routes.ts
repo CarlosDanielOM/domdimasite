@@ -18,10 +18,12 @@ import { ManageChannelRaidModuleComponent } from './manage-channel-raid-module/m
 import { ManageAdBreakModuleComponent } from './manage-ad-break-module/manage-ad-break-module.component';
 import { ShowReservedCommandsComponent } from './show-reserved-commands/show-reserved-commands.component';
 import { SongRequestModuleComponent } from './song-request-module/song-request-module.component';
+import { CommandsViewComponent } from './commands-view/commands-view.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, title: 'DomDimaBot' },
     { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
+    { path: 'commands', component: CommandsViewComponent, title: 'Commands' },
     {
         path: 'manage', component: ManageUserViewComponent, children: [
             { path: '', component: ManageViewComponent, title: 'Manage' },

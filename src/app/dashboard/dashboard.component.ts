@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Input, Renderer2 } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { PageAlertsComponent } from '../page-alerts/page-alerts.component';
 import { UserService } from '../user.service';
@@ -8,26 +8,32 @@ import { AlertsService } from '../alerts.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatRippleModule } from '@angular/material/core';
 import { SideNavbarComponent } from '../side-navbar/side-navbar.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [NavbarComponent, PageAlertsComponent, CommonModule, MatRippleModule, SideNavbarComponent],
+  imports: [NavbarComponent, PageAlertsComponent, CommonModule, MatRippleModule, SideNavbarComponent, RouterModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
+  @Input() toggle: any;
 
   joinable: boolean = true;
 
   authURL: string = ``
+
+  activeNav: boolean = true;
 
   constructor(
     private userService: UserService,
     private linksService: LinksService,
     private alertsService: AlertsService,
     private matSnackBar: MatSnackBar,
-    private location: Location
+    private location: Location,
+    private renderer: Renderer2,
+    private el: ElementRef
   ) { }
 
   ngOnInit() {
@@ -87,6 +93,18 @@ export class DashboardComponent {
 
   spotifyBtn() {
     window.location.href = `https://spotify.domdimabot.com/login?user_id=${this.userService.getId()}`;
+  }
+  
+  changeSideNavSize() {
+    let navbar = this.el.nativeElement.querySelector('side-navbar-container');
+    this.activeNav = !this.activeNav;
+
+    if (this.activeNav) {
+      this.renderer.setStyle(navbar, 'width', '250px');
+    } else {
+      this.renderer.setStyle(navbar, 'width', '50px');
+    }
+    
   }
   
 }

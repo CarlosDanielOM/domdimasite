@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="container">
-    <section id="side-navbar">
-        <app-side-navbar></app-side-navbar>
+    <section id="side-navbar-container">
+        <app-side-navbar (toggle)="changeSideNavSize()"></app-side-navbar>
     </section>
     <section id="main">
         <button class="btn" (click)="joinBtn()">

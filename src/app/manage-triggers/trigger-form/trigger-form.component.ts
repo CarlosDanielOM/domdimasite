@@ -96,7 +96,8 @@ export class TriggerFormComponent {
       response = await fetch(`${this.linksService.getApiURL()}/triggers/${this.userService.getId()}/${this.editForm.value._id}`, {
         method: 'PATCH',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${this.userService.getAuth()}`
         },
         body: JSON.stringify(data)
       });
@@ -119,7 +120,8 @@ export class TriggerFormComponent {
       response = await fetch(`${this.linksService.getApiURL()}/triggers/${this.userService.getId()}`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `${this.userService.getAuth()}`
         },
         body: JSON.stringify(data)
       });

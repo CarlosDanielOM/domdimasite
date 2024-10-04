@@ -1,15 +1,4 @@
 <div class="container">
-    <h3>Click one to go and edit</h3>
-    <!-- <div class="card" *ngFor="let opt of options" (click)="manageView(opt.route)">
-        <div class="card-header">
-            <h4 class="card-title">{{opt.name}}</h4>
-        </div>
-        <div class="card-body">
-            <div class="img-container">
-                <img src="assets/images/{{opt.img}}.png" alt="{{opt.name}}" class="img-fluid">
-            </div>
-        </div>
-    </div> -->
     @for (opt of options; track opt.name) {
         <mat-card class="card" (click)="manageView(opt.route)">
             <mat-card-header class="card-header">

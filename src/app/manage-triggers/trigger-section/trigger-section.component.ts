@@ -33,10 +33,14 @@ export class TriggerSectionComponent {
   }
 
   async getTriggerList(): Promise<Trigger[]> {
-    let res = await fetch(`${this.linkService.getApiURL()}/triggers/${this.userService.getId()}`);
+    let res = await fetch(`${this.linkService.getApiURL()}/triggers/${this.userService.getId()}`, {
+      headers: {
+        'Authorization': `${this.userService.getAuth()}`
+      }
+    });
     let data = await res.json();
 
-    return data.triggers;
+    return data.data;
   }
 
   async deleteTrigger(id: string) {
@@ -44,7 +48,10 @@ export class TriggerSectionComponent {
     if (!confirmDelete) return;
 
     const response = await fetch(`${this.linkService.getApiURL()}/triggers/${this.userService.getId()}/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Authorization': `${this.userService.getAuth()}`
+      }
     });
 
     const data = await response.json();
