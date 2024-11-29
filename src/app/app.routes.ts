@@ -22,21 +22,25 @@ import { CommandsViewComponent } from './commands-view/commands-view.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent, title: 'DomDimaBot' },
-    { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
-    { path: 'commands', component: CommandsViewComponent, title: 'Commands' },
     {
-        path: 'manage', component: ManageUserViewComponent, children: [
-            { path: '', component: ManageViewComponent, title: 'Manage' },
-            { path: 'triggers', component: ManageTriggersComponent, title: 'Manage Triggers' },
-            { path: 'vip', component: ManageVipModuleComponent, title: 'VIP' },
-            { path: 'clips', component: ManageClipsModuleComponent, title: 'Clips' },
-            { path: 'redemptions', component: ManageRedemptionsModuleComponent, title: 'Redemptions' },
-            { path: 'follows', component: ManageFollowModuleComponent, title: 'Follows' },
-            { path: 'stream-online', component: ManageStreamOnlineModuleComponent, title: 'Stream Online'},
-            { path: 'stream-offline', component: ManageStreamOfflineModuleComponent, title: 'Stream Offline' },
-            { path: 'raids', component: ManageChannelRaidModuleComponent, title: 'Raids' },
-            { path: 'ad-break', component: ManageAdBreakModuleComponent, title: 'Ad Break'},
-            { path: 'song-request', component: SongRequestModuleComponent, title: 'Song Request'}
+        path: ':streamer', component: DashboardComponent, title: 'Dashboard', children: [
+            { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
+            { path: 'commands', component: CommandsViewComponent, title: 'Commands' },
+            {
+                path: 'manage', component: ManageUserViewComponent, children: [
+                    { path: '', component: ManageViewComponent, title: 'Manage' },
+                    { path: 'triggers', component: ManageTriggersComponent, title: 'Manage Triggers' },
+                    { path: 'vip', component: ManageVipModuleComponent, title: 'VIP' },
+                    { path: 'clips', component: ManageClipsModuleComponent, title: 'Clips' },
+                    { path: 'redemptions', component: ManageRedemptionsModuleComponent, title: 'Redemptions' },
+                    { path: 'follows', component: ManageFollowModuleComponent, title: 'Follows' },
+                    { path: 'stream-online', component: ManageStreamOnlineModuleComponent, title: 'Stream Online'},
+                    { path: 'stream-offline', component: ManageStreamOfflineModuleComponent, title: 'Stream Offline' },
+                    { path: 'raids', component: ManageChannelRaidModuleComponent, title: 'Raids' },
+                    { path: 'ad-break', component: ManageAdBreakModuleComponent, title: 'Ad Break'},
+                    { path: 'song-request', component: SongRequestModuleComponent, title: 'Song Request'}
+                ]
+            },
         ]
     },
     {

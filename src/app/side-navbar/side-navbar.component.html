@@ -4,13 +4,13 @@
             <span class="side-toggle" (click)="toggleSize()"><</span>
         </div>
         <ul class="nav-menu">
-            <li (click)="routerLink('/dashboard')">
+            <li>
                 <span class="icon"></span>
-                <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+                <a [routerLink]="['/', username, 'dashboard']" routerLinkActive="active">Dashboard</a>
             </li>
-            <li (click)="routerLink('commands')">
+            <li>
                 <span class="icon"></span>
-                <a routerLink="/commands" routerLinkActive="active">Commands</a>
+                <a [routerLink]="['/', username, 'commands']" routerLinkActive="active">Commands</a>
             </li>
         </ul>
     </div>

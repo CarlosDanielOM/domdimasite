@@ -16,12 +16,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 export class NavbarComponent {
   title: string = 'DomDimaBot';
   username: string = '';
+  user: any = null;
 
   constructor(
     private userService: UserService,
     private router: Router,
     private renderer: Renderer2,
-    private el: ElementRef
+    private el: ElementRef,
   ) {
     if (!this.userService.restoreUser()) this.router.navigate(['/']);
     this.username = this.userService.getUsername();

@@ -1,26 +1,34 @@
 import { Component, ElementRef, EventEmitter, Output, Renderer2 } from '@angular/core';
 import { UserService } from '../user.service';
 import { LinksService } from '../links.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-side-navbar',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './side-navbar.component.html',
   styleUrl: './side-navbar.component.scss'
 })
 export class SideNavbarComponent {
 
   @Output() toggle: any = new EventEmitter();
+
+  username: string = '';
   
   constructor(
     private userService: UserService,
     private linkService: LinksService,
     private renderer: Renderer2,
     private el: ElementRef,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
+  ngOnInit() {
+    this.route.params.subscribe((params: any) => {
+      this.username = params.streamer;
+    });
+  }
   isActive: boolean = true;
 
   toggleSize() {

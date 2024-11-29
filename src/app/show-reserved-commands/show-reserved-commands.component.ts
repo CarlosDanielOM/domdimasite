@@ -21,9 +21,9 @@ export class ShowReservedCommandsComponent {
   }
 
   async ngOnInit() {
-    let res = await fetch(`${this.linksService.getApiURL()}/commands/reserved`);
+    let res = await fetch(`${this.linksService.getApiURL()}/config/commands/reserved`);
     let commands = await res.json();
-    this.commands = commands.commands;
+    this.commands = commands.data.commands;
   }
   
 }

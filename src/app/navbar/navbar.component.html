@@ -6,8 +6,8 @@
         <div class="menu" id="nav-menu">
             <span class="toolbar" id="nav-toolbar" (click)="navToggle()">=</span>
             <ul id="nav-list">
-                <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
-                <li><a [routerLink]="['/manage']" routerLinkActive="active">Manage</a></li>
+                <li><a [routerLink]="['/', username, 'dashboard']" routerLinkActive="active">Dashboard</a></li>
+                <li><a [routerLink]="['/', username, 'manage']" routerLinkActive="active">Manage</a></li>
                 <li><a routerLink="/logout" routerLinkActive="active">Logout</a></li>
             </ul>
         </div>

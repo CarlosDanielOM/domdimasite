@@ -6,7 +6,10 @@ export interface Command {
     message: string;
     reserved: boolean;
     cooldown: number;
-    description?: string;
+    description?: {
+        en: string;
+        es: string;
+    };
     userLevel: number;
     userLevelName: string;
     createdAt?: Date;

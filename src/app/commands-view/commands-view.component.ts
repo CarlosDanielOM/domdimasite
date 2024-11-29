@@ -34,7 +34,10 @@ export class CommandsViewComponent {
     message: new FormControl(''),
     reserved: new FormControl(false),
     cooldown: new FormControl(10),
-    description: new FormControl(''),
+    description: new FormControl({
+      en: '',
+      es: ''
+    }),
     userLevel: new FormControl(1),
     userLevelName: new FormControl('everyone'),
     channelID: new FormControl(''),
@@ -122,7 +125,10 @@ export class CommandsViewComponent {
       message: this.commandForm.value.message,
       reserved: this.commandForm.value.reserved,
       cooldown: this.commandForm.value.cooldown,
-      description: this.commandForm.value.description,
+      description: {
+        en: '',
+        es: '',
+      },
       userLevel: this.commandForm.value.userLevel,
       userLevelName: this.userLevelNames[this.commandForm.value.userLevel - 1],
       channelID: this.userService.getId(),
@@ -140,7 +146,10 @@ export class CommandsViewComponent {
     this.commandForm.controls['message'].setValue('');
     this.commandForm.controls['reserved'].setValue(false);
     this.commandForm.controls['cooldown'].setValue(10);
-    this.commandForm.controls['description'].setValue('');
+    this.commandForm.controls['description'].setValue({
+      en: '',
+      es: ''
+    });
     this.commandForm.controls['userLevel'].setValue(1);
     this.commandForm.controls['userLevelName'].setValue('everyone');
     this.commandForm.controls['channelID'].setValue(this.userService.getId());

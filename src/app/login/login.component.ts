@@ -95,7 +95,7 @@ export class LoginComponent {
             console.log('Active:', active);
             UserInfoData.active = active.active || false;
             this.userService.createUser(UserInfoData);
-            this.router.navigate(['/dashboard']);
+            this.router.navigate([`/${user.login}/dashboard`]);
           });
         } else {
           this.userService.deleteData();
@@ -163,7 +163,7 @@ export class LoginComponent {
         }
         UserInfoData.role = premium.premium || 'none';
         this.userService.createUser(UserInfoData);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate([`/${res.login}/dashboard`]);
       });
     });
 
