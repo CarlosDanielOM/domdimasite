@@ -23,7 +23,8 @@ import { CommandsViewComponent } from './commands-view/commands-view.component';
 export const routes: Routes = [
     { path: '', component: HomeComponent, title: 'DomDimaBot' },
     {
-        path: ':streamer', component: DashboardComponent, title: 'Dashboard', children: [
+        path: 'streamer/:username', title: 'Dashboard', children: [ 
+            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent, title: 'Dashboard' },
             { path: 'commands', component: CommandsViewComponent, title: 'Commands' },
             {

@@ -46,6 +46,7 @@ export class LoginComponent {
   }
 
   loginWithToken(token: string): void {
+    console.log('Login with token');
     // Add a return statement to ensure the function returns a value
     let response: any = null;
 
@@ -59,6 +60,7 @@ export class LoginComponent {
       let user = res.data[0] || {};
       if (!user.id) {
         //! User Denied Access
+        console.log('User Denied Access');
         this.userService.deleteData();
         this.router.navigate(['/']);
       }
@@ -95,7 +97,7 @@ export class LoginComponent {
             console.log('Active:', active);
             UserInfoData.active = active.active || false;
             this.userService.createUser(UserInfoData);
-            this.router.navigate([`/${user.login}/dashboard`]);
+            this.router.navigate([`/streamer/${user.login}/dashboard`]);
           });
         } else {
           this.userService.deleteData();
@@ -109,6 +111,7 @@ export class LoginComponent {
   }
 
   checkIfUserExists(token: string): void {
+    console.log('Checking if user exists');
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', `Bearer ${token}`);
@@ -143,6 +146,7 @@ export class LoginComponent {
           active: false,
           auth: exists.token
         }
+        console.log('User does not exist, creating user');
         let response = await fetch(`${this.linksService.getApiURL()}/user/active/${res.login}`);
         let active = await response.json();
         UserInfoData.active = active.active || false;
@@ -163,7 +167,7 @@ export class LoginComponent {
         }
         UserInfoData.role = premium.premium || 'none';
         this.userService.createUser(UserInfoData);
-        this.router.navigate([`/${res.login}/dashboard`]);
+        this.router.navigate([`/streamer/${res.login}/dashboard`]);
       });
     });
 

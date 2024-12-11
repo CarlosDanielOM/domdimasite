@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class LinksService {
-  prod: boolean = false;
+  prod: boolean = false; // Change this to true when deploying to production
   twitchAuthURL: string;
 
   constructor() {
